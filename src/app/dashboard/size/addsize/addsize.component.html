@@ -1,0 +1,43 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="addcar">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+          {{'اضافة مقاس جديده' | translate}}
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          {{'تعديل المقاس' | translate}} 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="sizeControl.invalid && sizeControl.touched">
+                  <mat-label>{{'المقاس' | translate}}</mat-label>
+                  <input matInput 
+                  [(ngModel)]="sizename"
+                   name= "sizename"
+                   placeholder="الطولxالعرض"
+                   required
+                   #sizeControl="ngModel">  
+                  <mat-error class="text-danger" *ngIf="sizeControl.invalid && sizeControl.touched">{{'يجب ادخال المقاس  ' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">{{'اضف' | translate}}</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">{{'تعديل' | translate}}</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
