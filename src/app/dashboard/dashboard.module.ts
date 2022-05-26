@@ -39,60 +39,38 @@ import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import { DashboardRoutes } from './dashboard.routing';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { WidgetComponentModule } from '../widget-component/widget-component.module';
-import { SaasComponent } from './saas/saas.component';
-import { CrmComponent } from './crm/crm.component';
-
-
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 // import { ModalModule } from '@bit/valor-software.ngx-bootstrap.modal';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DistrictComponent } from './district/district.component';
-import { AdddistrictComponent } from './district/adddistrict/adddistrict.component';
 import { CategoryComponent } from './category/category.component';
 import { AddcategoryComponent } from './category/addcategory/addcategory.component';
-import { AddressComponent } from './address/address.component';
-import { AddAddressComponent } from './address/add-address/add-address.component';
+import {MatNativeDateModule} from '@angular/material/core';
 import { AdsComponent } from './ads/ads.component';
 import { AddAdsComponent } from './ads/add-ads/add-ads.component';
-import { PromocodesComponent } from './promocodes/promocodes.component';
-import { AddPromoComponent } from './promocodes/add-promo/add-promo.component';
 import { AdminsComponent } from './admins/admins.component';
-import { AddAdminsComponent } from './admins/add-admins/add-admins.component';
-import { ClientsComponent } from './clients/clients.component';
+import { AddAdminComponent } from './admins/add-admin/add-admin.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { AddSubComponent } from './sub-categories/add-sub/add-sub.component';
+import { ProductsComponent } from './products/products.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import {MatNativeDateModule} from '@angular/material/core';
-import { ColorComponent } from './color/color.component';
-import { AddcolorComponent } from './color/addcolor/addcolor.component';
-import { SizeComponent } from './size/size.component';
-import { AddsizeComponent } from './size/addsize/addsize.component';
 
 @NgModule({
 	declarations: [
-		SaasComponent,
-		CrmComponent,
-		DistrictComponent,
-		AdddistrictComponent,
 		CategoryComponent,
 		AddcategoryComponent,
-		AddressComponent,
-		AddAddressComponent,
 		AdsComponent,
 		AddAdsComponent,
-		PromocodesComponent,
-		AddPromoComponent,
 		AdminsComponent,
-		AddAdminsComponent,
-		ClientsComponent,
+		AddAdminComponent,
+		SubCategoriesComponent,
+		AddSubComponent,
+		ProductsComponent,
+		AddProductComponent,
 		ProfileComponent,
-		ChangePasswordComponent,
-		ColorComponent,
-		AddcolorComponent,
-		SizeComponent,
-		AddsizeComponent,
 	],
 	imports: [ GridModule,
 		ListViewModule ,

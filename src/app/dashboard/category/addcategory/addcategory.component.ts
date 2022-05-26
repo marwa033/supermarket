@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,11 +7,10 @@ import { CategoryService } from '../Category.service';
 @Component({
   selector: 'ms-addcategory',
   templateUrl: './addcategory.component.html',
-  styleUrls: ['./addcategory.component.scss']
+  styleUrls: ['./addcategory.component.scss'],
+	// encapsulation: ViewEncapsulation.None,
 })
 export class AddcategoryComponent implements OnInit {
-  color;
-  type;
   categoryId;
   enname;
   arname;
@@ -20,10 +19,10 @@ export class AddcategoryComponent implements OnInit {
   imgResultBeforeCompress;
   imgResultAfterCompress;
   caategoryresults;
-  typeDetect: string = "service";
   updateFlag: boolean = false;
   id;
   category;
+  featured;
   constructor(private imageCompress: NgxImageCompressService,
     private route: ActivatedRoute,
               private spinner: NgxSpinnerService,
@@ -36,8 +35,6 @@ export class AddcategoryComponent implements OnInit {
            result => {
              this.imageSrc = result;
              this.imgResultAfterCompress = result;
-            //  console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
-            //  console.log(result)
            }
          );
        });       
@@ -51,20 +48,25 @@ export class AddcategoryComponent implements OnInit {
       }
       this.categoryService.GetCategoryId(this.id).
       then( response => { this.category = response;
+        console.log(this.category)
+        this.enname = this.category.name.en;
+        this.arname = this.category.name.ar;
+        this.imageSrc = this.category.image;
+        if(this.category.featured === true){
+          this.featured = 'true'
+        } else{
+          this.featured = 'false'
+        }
         setTimeout(() => {
           this.spinner.hide();
         }, this.category);
-        this.enname = this.category.name.en;
-        this.arname = this.category.name.ar;
-        this.type = this.category.type;
-        this.categoryId = this.category.parentId;
-        this.imageSrc = this.category.image;
-        this.color = this.category.color
+
       });
     })
   }
   
 Add(value){
+  
   this.spinner.show()
   console.log(this.updateFlag)
   if(this.updateFlag === false){

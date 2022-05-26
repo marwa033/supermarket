@@ -20,6 +20,7 @@ export class AdminsComponent implements OnInit {
   admins;
   name: string;
   role = JSON.parse(localStorage.getItem("adminRole"));
+  lang = JSON.parse(localStorage.getItem('language'))
  
   constructor(
     public adminService: AdminsService,
@@ -33,7 +34,7 @@ export class AdminsComponent implements OnInit {
   }
   Admins(){
     this.spinner.show()
-     this.adminService.Get().
+     this.adminService.Get(this.lang).
               then( responsedistrictdata => { this.admins = responsedistrictdata.data;
                  this.dataSource = new MatTableDataSource(responsedistrictdata.data);
                  this.dataSource.paginator = this.paginator;

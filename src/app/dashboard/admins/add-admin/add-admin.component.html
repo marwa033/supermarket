@@ -1,0 +1,125 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole === 'editor'">
+  <span>No Authorization</span>
+</div>
+<div class="add" *ngIf="AdminRole != 'editor'">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header" *ngIf="!updateFlag">
+          {{ 'Add new admin' | translate}}
+        </h4>
+        <h4 class="card-header" *ngIf="updateFlag">
+          {{'Edit admin' | translate }}
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="nameControl.invalid && nameControl.touched">
+                  <mat-label>{{'Name' | translate }} </mat-label>
+                  <input matInput 
+                  [(ngModel)]="name" 
+                  name= "name"  
+                  autocomplete="off"
+                  required
+                  #nameControl="ngModel">
+                  <mat-error class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">{{'Enter your name' | translate }} </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="emailControl.invalid && emailControl.touched">
+                    <mat-label>{{'E-mail' | translate }}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="email" 
+                    name= "email"  
+                    autocomplete="off"
+                    required
+                    email
+                    #emailControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">{{'must email' | translate}}</mat-error>
+                    <mat-error class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">{{'Incorrect e-mail' | translate}}</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="phoneControl.invalid && phoneControl.touched">
+                    <mat-label>{{'Phone Number' | translate}}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="phone" 
+                    name= "phone"  
+                    autocomplete="off"
+                    required
+                    #phoneControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="phoneControl.invalid && phoneControl.touched">{{'Enter your phone number' | translate}}</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-6" *ngIf="!updateFlag">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                    <mat-label>{{'Password' | translate}}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="password" 
+                    name= "password"  
+                    type="password"
+                    autocomplete="off"
+                    required
+                    #passwordControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="passwordControl.invalid && passwordControl.touched">{{'Enter password' | translate}}</mat-error>
+                  </mat-form-field>
+            </div>
+              <div class="col-md-6" *ngIf="updateFlag">
+                <button mat-raised-button  type="button"
+                color="accent" (click)="openSm(changePassword)">{{'Change Password' | translate}}</button>
+              </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" [class.has-error]="roleControl.invalid && roleControl.touched">
+                    <mat-label>{{'Role' | translate}}</mat-label>
+                    <mat-select [(ngModel)]="role"
+                     name="role"
+                     required
+                     #roleControl="ngModel">
+                      <mat-option value="super">{{'Super' | translate}}</mat-option>
+                      <mat-option value="contributer">{{'Contributor' | translate}}</mat-option>
+                      <mat-option value="editor">{{'Editor' | translate}}</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="roleControl.invalid && roleControl.touched">{{'Enter Role' | translate}}</mat-error>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">{{'Add' | translate}}</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">{{'Update' | translate}}</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+    
+    <ng-template #changePassword let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">{{'Change Password' | translate}} </h4>
+      </div>
+      <form #form="ngForm" >
+      <div class="modal-body">
+          <section class="row">
+              <section class="col-md-12">
+                  <mat-form-field>
+                      <input matInput placeholder="{{'New password' | translate}}" name="newPassword" type="password"  [(ngModel)]="newPassword">
+                  </mat-form-field>
+              </section>
+          </section>
+     </div>
+      <div class="modal-footer">
+        <button class="primary-bg"  style="width:100%; text-align:center" (click)="revoke()" type="button" mat-raised-button >{{'Add' | translate}}</button>
+      </div>
+    </form> 
+    </ng-template>

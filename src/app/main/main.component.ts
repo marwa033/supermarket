@@ -12,9 +12,10 @@ import { AuthService } from '../service/auth-service/auth.service';
 import { CoreService } from '../service/core/core.service';
 import { Location } from '@angular/common'
 import { CellOptionsDialogService } from '@syncfusion/ej2-angular-documenteditor';
-import { SaasComponent } from '../dashboard/saas/saas.component';
+// import { SaasComponent } from '../dashboard/saas/saas.component';
 import { MatTableDataSource } from '@angular/material';
 import { NgxSpinnerService } from "ngx-spinner";
+import { CategoryService } from 'app/dashboard/category/Category.service';
 declare var require: any
 
 const screenfull = require('screenfull');
@@ -36,7 +37,7 @@ export class MainComponent implements OnInit, AfterContentChecked {
 	chatList              : any;
 	currentUrl            : any;
 	root                  : any ;
-	layout                : any ="rtl";
+	layout                : any ="ltr";
 	currentLang           : any ;
 	customizerIn          : boolean = false;
 	showSettings          : boolean = false;
@@ -57,6 +58,30 @@ export class MainComponent implements OnInit, AfterContentChecked {
 	
 	dataSource: MatTableDataSource<unknown>;
 	selectImage = 'assets/img/en.png';
+
+
+
+	constructor(public tourService: TourService, 
+		public menuItems: MenuItems, 
+		public location: Location, 
+		private route: ActivatedRoute,
+		private spinner: NgxSpinnerService,
+		private breadcrumbService: BreadcrumbService, 
+		private pageTitleService: PageTitleService, 
+		public translate: TranslateService, 
+		public categoryService: CategoryService,
+		private router: Router,
+		private authService : AuthService,
+		public coreService : CoreService,) {
+
+const browserLang: string = translate.getBrowserLang();
+translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+
+breadcrumbService.addFriendlyNameForRoute('/dashboard', 'Dashboard');
+breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'showcategory');
+}
+
+
 	private _routerEventsSubscription  : Subscription;
 	private _router                    : Subscription;
 	@ViewChild('sidenav',{static : true}) sidenav;
@@ -74,28 +99,25 @@ export class MainComponent implements OnInit, AfterContentChecked {
 		},
   
 	 ];
-  
 	setLang(lang) {
 		for(let data of this.langArray) {
 		   if(lang == data.value) {
 			  if(lang === 'ar'){
-				if(confirm("You will start from the home page again")){
 					this.selectImage = data.img;
 				  this.layout = 'rtl';
-					this.router.navigate(['dashboard/crm'])
+				  this.getlang('ar');	
 					this.translate.setDefaultLang('ar')
-					this.translate.use(lang);}
+					this.translate.use(lang);
 			  }else{
-				if(confirm("You will start from the home page again")){
+				// if(confirm("You will start from the home page again")){
 					this.selectImage = data.img;
 				  this.layout = 'ltr';
-				  this.router.navigate(['dashboard/crm'])
+				  this.getlang('en');	
 				  this.translate.setDefaultLang('en')
 				  this.translate.use(lang);
-				}
+				// }
 			  }		
 			  
-			  this.getlang(lang);	
 			  break;
 			  
 		   }
@@ -129,26 +151,7 @@ export class MainComponent implements OnInit, AfterContentChecked {
 		}
 	]
 
-	constructor(public tourService: TourService, 
-					public menuItems: MenuItems, 
-					public location: Location, 
-					private route: ActivatedRoute,
-					private spinner: NgxSpinnerService,
-					private breadcrumbService: BreadcrumbService, 
-					private pageTitleService: PageTitleService, 
-					public translate: TranslateService, 
-					private router: Router,
-					private authService : AuthService,
-					public coreService : CoreService,
-					private routes :Router,
-					private activatedRoute: ActivatedRoute ) {
 
-		const browserLang: string = translate.getBrowserLang();
-		translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-
-		breadcrumbService.addFriendlyNameForRoute('/dashboard', 'Dashboard');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'showcategory');
-	}
 	ngAfterContentChecked() {
         // this.changeDetectorRefs.detectChanges();
     }

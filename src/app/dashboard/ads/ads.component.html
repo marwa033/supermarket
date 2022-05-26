@@ -1,61 +1,74 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="container-fluide">
-    <form #form="ngForm" (ngSubmit)="Filter(form.value)">
+
+<div class="show container">
+    <form #form="ngForm" (ngSubmit)="filter(form.value)">
      <div class="row">
-       <section class="col-md-3">
+      <section class="col-md-3">
         <mat-form-field >
-          <mat-label>الحالة</mat-label>
+          <mat-label>{{'State' | translate}}</mat-label>
           <mat-select [(ngModel)]="status" name="status">
-            <mat-option value="active">نشط</mat-option>
-            <mat-option value="inActive">غير نشط</mat-option>
+            <mat-option value="active">{{'Active' | translate}}</mat-option>
+            <mat-option value="inActive">{{'InActive' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
        </section>
-
+       <section class="col-md-3" style="display: none;">
+         <mat-form-field >
+           <mat-label>{{'Featured' | translate}}</mat-label>
+           <mat-select [(ngModel)]="featured" name="featured">
+             <mat-option value=true>{{'true' | translate}}</mat-option>
+             <mat-option value=false>{{'False' | translate}}</mat-option>
+           </mat-select>
+         </mat-form-field>
+        </section>
        <section class="col-md-3 mb-2" style="display: flex;">
-        <button mat-raised-button color="accent">بحث</button>
-        <button mat-raised-button color="warn" type="button" (click)="action()">مسح</button>
+        <button mat-raised-button color="accent">{{'Search' | translate}}</button>
+        <button mat-raised-button color="warn" type="button" (click)="action()">{{'Clear' | translate}}</button>
        </section>
      </div>
-    <div class="mat-elevation-z8 example-container">
-  
+     <div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="ads.length === 0">
+      <span>{{'No data to show' | translate}}</span>
+      <mat-icon class="pointer" 
+      (click)="action()">undo</mat-icon>
+    </div>
+    <div class="mat-elevation-z8 example-container" > 
+
     <table mat-table [dataSource]="dataSource" >
-    
        <ng-container matColumnDef="count">
         <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
         <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
       </ng-container>
+
       <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef class="try"> {{'الصوره' | translate}} </th>
-        <td mat-cell *matCellDef="let element" class="try"> 
-          <img [src]="element.image" onerror= "this.src='assets/img/1274512-placeholder.png';"/> 
+        <th mat-header-cell *matHeaderCellDef > {{'Image' | translate}} </th>
+        <td mat-cell *matCellDef="let element" > 
+          <img [src]="element.image" class="showImage" onerror= "this.src='assets/img/1274512-placeholder.png';"/> 
         </td>
-    </ng-container>
-
-          <ng-container matColumnDef="endDate">
-            <th mat-header-cell *matHeaderCellDef> {{'الانتهاء' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.endDate }} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="mechanic">
-            <th mat-header-cell *matHeaderCellDef> {{'ميكانيكى' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.vendor?.name }} </td>
-          </ng-container>
+        
+      </ng-container>      
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef > {{'Name' | translate}} </th>
+          <td mat-cell *matCellDef="let element" > {{element.name }} </td>
           
-          <ng-container matColumnDef="winch">
-            <th mat-header-cell *matHeaderCellDef> {{'ونش' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.winch?.name }} </td>
-          </ng-container>
-      
+        </ng-container>
+
+        
+        <ng-container matColumnDef="url">
+          <th mat-header-cell *matHeaderCellDef > {{'URL' | translate}} </th>
+          <td mat-cell *matCellDef="let element" > 
+            <a href="{{element.url }}" target="_blank">{{element.url }}</a>  
+             </td>
+        </ng-container>
         <!-- Weight Column -->
         <ng-container matColumnDef="updatedAt">
-          <th mat-header-cell *matHeaderCellDef> {{'تعديل' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'updatedAt' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'d/M/yyy'}} </td>
         </ng-container>
         
         <!-- Name Column -->
         <ng-container matColumnDef="createdAt">
-          <th mat-header-cell *matHeaderCellDef> {{'انشاء' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'createdAt' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'d/M/yyy' }} </td>
         </ng-container>
       
@@ -64,9 +77,9 @@
                 <td mat-cell *matCellDef="let element">
                   <mat-icon style="color:dodgerblue"class="pointer"  title="edit" (click)="editRow(element)" >
                     edit </mat-icon>  
-                <mat-icon style="color:#ffae00"class="pointer" title="inactive" *ngIf="element.state === 'inActive'" (click)="Active(element)">highlight_off</mat-icon>  
-                <mat-icon style="color:green"class="pointer" title="active" *ngIf="element.state === 'active'" (click)="Active(element)">check_circle_outline</mat-icon>
-                <mat-icon style="color:red"class="pointer" title="delete" (click)="deleteRow(element)" >delete</mat-icon>  </td>
+                <mat-icon style="color:#ffae00;cursor: pointer;" title="inactive" *ngIf="element.state === 'inActive'" (click)="Active(element)">highlight_off</mat-icon>  
+                <mat-icon style="color:green;cursor: pointer;" title="active" *ngIf="element.state === 'active'" (click)="Active(element)">check_circle_outline</mat-icon>
+              </td>
               </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -76,3 +89,5 @@
     </div>
   </form>
   </div>
+
+  

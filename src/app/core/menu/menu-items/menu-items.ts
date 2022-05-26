@@ -15,112 +15,62 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-//   {
-// 	 state: 'crm',
-// 	 name: 'الرئسية',
-// 	 type: 'button',
-// 	 icon: 'home',
-//   },
-//   {
-// 	 state: 'dashboard',
-// 	 name: 'المنتجات',
-// 	 type: 'sub',
-// 	 icon: 'shopping_cart',
-// 	 children: [
-// 		{state: 'products', name: 'عرض'},
-// 		{state: 'addproduct', name: 'اضف'}
-// 	 ]
-//   },
+  {
+	 state: 'crm',
+	 name: 'Home',
+	 type: 'button',
+	 icon: 'home',
+  },
   {
 	 state: 'dashboard',
-	 name: 'الفئات',
+	 name: 'Admins',
 	 type: 'sub',
 	 icon: 'category',
 	 children: [
-		{state: 'category', name: 'عرض'},
-		{state: 'addcategory', name: 'اضف'}
+		{state: 'admins', name: 'Show'},
+		{state: 'addadmin', name: 'Add'}
 	 ]
   },
   {
 	 state: 'dashboard',
-	 name: 'اللون',
+	 name: 'Ads',
 	 type: 'sub',
-	 icon: 'room',
+	 icon: 'category',
 	 children: [
-		{state: 'color', name: 'عرض'},
-		{state: 'addcolor', name: 'اضف'}
+		{state: 'ads', name: 'Show'},
+		{state: 'addads', name: 'Add'}
 	 ]
   },
   {
 	 state: 'dashboard',
-	 name: 'المقاس',
+	 name: 'Categories',
 	 type: 'sub',
-	 icon: 'addchart',
+	 icon: 'category',
 	 children: [
-		{state: 'size', name: 'عرض'},
-		{state: 'addsize', name: 'اضف'}
+		{state: 'category', name: 'Show'},
+		{state: 'addcategory', name: 'Add'}
 	 ]
   },
-//   {
-// 	 state: 'dashboard',
-// 	 name: 'خصومات',
-// 	 type: 'sub',
-// 	 icon: 'money',
-// 	 children: [
-// 		{state: 'promo', name: 'عرض'},
-// 		{state: 'addpromo', name: 'اضف'}
-// 	 ]
-//   },
   {
 	 state: 'dashboard',
-	 name: 'المشرفين',
+	 name: 'Sub Categories',
 	 type: 'sub',
-	 icon: 'supervisor_account',
+	 icon: 'category',
 	 children: [
-		{state: 'admins', name: 'عرض'},
-		{state: 'addadmin', name: 'اضف'}
+		{state: 'sub', name: 'Show'},
+		{state: 'addsub', name: 'Add'}
 	 ]
   },
-//   {
-// 	 state: 'dashboard',
-// 	 name: 'فنيين',
-// 	 type: 'sub',
-// 	 icon: 'money',
-// 	 children: [
-// 		{state: 'mechanical', name: 'عرض'},
-// 		{state: 'addmechanical', name: 'اضف'}
-// 	 ]
-//   },
-//   {
-// 	 state: 'dashboard',
-// 	 name: 'ونش',
-// 	 type: 'sub',
-// 	 icon: 'supervisor_account',
-// 	 children: [
-// 		{state: 'winch', name: 'عرض'},
-// 		{state: 'addwinch', name: 'اضف'}
-// 	 ]
-//   },
   {
 	 state: 'dashboard',
-	 name: 'عملاء',
+	 name: 'Products',
 	 type: 'sub',
-	 icon: 'supervisor_account',
+	 icon: 'category',
 	 children: [
-		{state: 'clients', name: 'عرض'},
+		{state: 'products', name: 'Show'},
+		{state: 'addproduct', name: 'Add'}
 	 ]
-  },
-//   {
-// 	 state: 'dashboard',
-// 	 name: 'الطلبات',
-// 	 type: 'sub',
-// 	 icon: 'supervisor_account',
-// 	 children: [
-// 		{state: 'productorder', name: 'طلبات المنتجات'},
-// 		{state: 'vendororder', name: 'طلبات الفنيين'},
-// 		{state: 'winchorder', name: 'طلبات الونش'},
-// 	 ]
-//   },
+  }
 ];
 
 @Injectable()

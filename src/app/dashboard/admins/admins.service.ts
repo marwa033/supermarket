@@ -13,6 +13,7 @@ export class AdminsService {
   add: any;
   result: any;
   getResult: any;
+  lang='en';
   delete: any;
   constructor(private toastr : ToastrService,
     private router: Router,) { }
@@ -32,14 +33,16 @@ export class AdminsService {
       this.result = responsedata;
       return this.result;
     }
-    async Get() {
+    async Get(lang) {
+      this.lang = lang
+      console.log(lang)
       const request = new Request(`${SharedData.BASE_URL}auth/admins`,
       { method: 'GET',
       });
             request.headers.delete('Content-Type');
             request.headers.append('Content-Type', 'application/json');
            request.headers.append('x-auth-token', this.token);
-            request.headers.append('lang', 'ar');
+            request.headers.append('lang', lang);
             const response = await fetch( request);
       const responsedata = await response.json();
       this.getResult = responsedata;

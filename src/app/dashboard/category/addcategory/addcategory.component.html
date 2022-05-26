@@ -1,45 +1,64 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="addcar">
+<div class="add">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header"
         *ngIf="!updateFlag">
-          {{'اضافة فئة جديده' | translate}}
+          {{'Add category' | translate}}
         </h4>
         <h4 class="card-header"
         *ngIf="updateFlag">
-          {{'تعديل فئة' | translate}} 
+          {{'Edit category' | translate}} 
         </h4>
         <div class="card-body">
             <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
                 <div class="row">
                 <div class="col-md-6">
                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arControl.invalid && arControl.touched">
-                  <mat-label>{{'الاسم بالغه العربية' | translate}}</mat-label>
+                  <mat-label>{{'Name in arabic' | translate}}</mat-label>
                   <input matInput 
                   [(ngModel)]="arname"
                    name= "arname"
+                   autocomplete="off"
                    required
                    #arControl="ngModel">  
-                  <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">{{'يجب ادخال الاسم بالغه العربية' | translate}}</mat-error>
+                  <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">{{'Enter name in arabic' | translate}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enControl.invalid && enControl.touched">
-                    <mat-label>{{'الاسم بالغه الانجليزية' | translate}}</mat-label>
+                    <mat-label>{{'Name in english' | translate}}</mat-label>
                     <input matInput 
                     [(ngModel)]="enname" 
                     name= "enname"
                     required
+                    autocomplete="off"
                     #enControl="ngModel">
-                    <mat-error class="text-danger" *ngIf="enControl.invalid && enControl.touched">{{'يجب ادخال الاسم بالغه الانجليزية' | translate}}</mat-error>
+                    <mat-error class="text-danger" *ngIf="enControl.invalid && enControl.touched">{{'Enter name in english' | translate}}</mat-error>
                 </mat-form-field>
             </div>
+            <section class="col-md-6">
+              <label >{{ 'featured' | translate}}</label><br>
+              <input type="radio" name="featured" [(ngModel)]="featured" value=true>{{'True'|translate}}<br>
+              <input type="radio" name="featured" [(ngModel)]="featured" value=false>{{'False' |translate}}
+            </section>
+      <!-- <section class="col-md-6">
+        <mat-form-field appearance="fill" [class.has-error]="featuredControl.invalid && featuredControl.touched">
+          <mat-label>{{'Featured' | translate}}</mat-label>
+          <mat-select [(ngModel)]="featured" name="featured"
+          required
+          #featuredControl="ngModel">
+            <mat-option value=true>{{'true' | translate}}</mat-option>
+            <mat-option value=false>{{'false' | translate}}</mat-option>
+          </mat-select>
+          <mat-error class="text-danger" *ngIf="featuredControl.invalid && featuredControl.touched">{{'Enter the featured' | translate}}</mat-error>
+        </mat-form-field>
+       </section> -->
             <div class="col-md-6">
-                <img [src]="imageSrc" style="max-width:300px;max-height:300px"
+                <img [src]="imageSrc" class="imageSrc"
                 onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
                 <button (click)="uploadFile()" type="button" mat-raised-button >{{'Upload' | translate}}</button>
-            <mat-form-field class="rid">
+            <mat-form-field style="display:none">
                 <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
             </mat-form-field>
             </div>
@@ -47,12 +66,13 @@
         <div class="flex-button">
             <button mat-raised-button 
             color="primary"
+            class="button"
             *ngIf="!updateFlag"
-            [disabled]="form.invalid">{{'اضف' | translate}}</button>
+            [disabled]="form.invalid">{{'Add' | translate}}</button>
             <button mat-raised-button 
             color="primary"
             *ngIf="updateFlag"
-            [disabled]="form.invalid">{{'تعديل' | translate}}</button>
+            [disabled]="form.invalid">{{'Update' | translate}}</button>
         </div>      
         </form>
         </div>

@@ -15,17 +15,32 @@ export class CategoryService {
   getfilterCategorytResult: any;
   active: any;
   categoryresult: any;
+  lang="en";
   constructor(private toastr : ToastrService,
     private router: Router,) { }
   
-  async GetCategories() {
+  async GetCategories(lang) {
+    this.lang = lang;
     const request = new Request(`${SharedData.BASE_URL}components/categories`,
     { method: 'GET',
     });
           request.headers.delete('Content-Type');
           request.headers.append('Content-Type', 'application/json');
          request.headers.append('x-auth-token', this.token);
-            request.headers.append('lang', 'ar');
+            request.headers.append('lang', lang);
+          const response = await fetch( request);
+    const responsedata = await response.json();
+    this.getCategoryResult = responsedata;
+    return this.getCategoryResult;
+  }
+  async GetActive() {
+    const request = new Request(`${SharedData.BASE_URL}components/categories?state=active`,
+    { method: 'GET',
+    });
+          request.headers.delete('Content-Type');
+          request.headers.append('Content-Type', 'application/json');
+         request.headers.append('x-auth-token', this.token);
+            request.headers.append('lang', this.lang);
           const response = await fetch( request);
     const responsedata = await response.json();
     this.getCategoryResult = responsedata;
@@ -34,7 +49,10 @@ export class CategoryService {
 
   
   async Add(value) {
-    const data = {name:{ en: value.enname , ar: value.arname},
+    if(value.featured === undefined){
+      value.featured = false
+    }
+    const data = {name:{ en: value.enname , ar: value.arname}, featured: value.featured,
      image:value.imageSrc};  
     const bodyobj = JSON.stringify(data);
     const request = new Request(`${SharedData.BASE_URL}components/categories`, {
@@ -64,7 +82,11 @@ export class CategoryService {
 
   
 async Update(value,id) {
-  const data = {name:{ en: value.enname , ar: value.arname},
+  
+  if(value.featured === undefined){
+    value.featured = false
+  }
+  const data = {name:{ en: value.enname , ar: value.arname}, featured: value.featured,
    image:value.imageSrc,
    _id: id};  
   const bodyobj = JSON.stringify(data);
@@ -121,7 +143,7 @@ async GetCategoryId(id) {
         request.headers.delete('Content-Type');
         request.headers.append('Content-Type', 'application/json');
        request.headers.append('x-auth-token', this.token);
-            request.headers.append('lang', 'ar');
+            request.headers.append('lang', this.lang);
         const response = await fetch( request);
   const responsedata = await response.json();
   this.categoryresult = responsedata;
@@ -137,13 +159,29 @@ async GetFilterCategory(value) {
   if(value.status === ""){
     value.status = undefined
   }
-  const request = new Request(`${SharedData.BASE_URL}components/categories?state=` +value.status,
-  { method: 'GET',}
-  )
+  if(value.featured === ""){
+    value.featured = undefined
+  }
+  if(value.featured != undefined && value.status === undefined){
+
+    var newRequest = new Request(`${SharedData.BASE_URL}components/categories?featured=`+value.featured,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined && value.featured === undefined){
+
+    var newRequest = new Request(`${SharedData.BASE_URL}components/categories?state=` +value.status,
+    { method: 'GET',}
+    )
+  }else{
+    var newRequest = new Request(`${SharedData.BASE_URL}components/categories?state=` +value.status+'&featured='+value.featured,
+    { method: 'GET',}
+    )
+  }
+  const request = newRequest;
         request.headers.delete('Content-Type');
         request.headers.append('Content-Type', 'application/json');
        request.headers.append('x-auth-token', this.token);
-            request.headers.append('lang', 'ar');
+            request.headers.append('lang', this.lang);
         const response = await fetch( request);
   const responsecategoryfilter = await response.json();
   this.getfilterCategorytResult = responsecategoryfilter;

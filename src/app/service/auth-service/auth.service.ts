@@ -10,7 +10,8 @@ import { SharedData } from '../../Shared/sharedClass';
 export class AuthService {
   userData   : any;
   isLoggedIn = false;
-   result: any;
+  result: any;
+  type: boolean = true
 
    constructor(private firebaseAuth : AngularFireAuth,
                private router : Router,
@@ -48,13 +49,11 @@ export class AuthService {
       this.router.navigate(['/session/login']);
     }
      else{
-      this.getrsponse(responsedata);
-      this.Profile()
+         this.Profile()
+         this.getrsponse(responsedata);
     }
    }
    getrsponse(resposne) {
-      this.toastr.success('Successfully Logged In!');
-      this.router.navigate(['/']);
       this.userData = resposne['x-auth-token'];
       this.setHeader(this.userData)
   }
@@ -75,7 +74,6 @@ export class AuthService {
       this.isLoggedIn = true;
    }
    async Update(value){
-      console.log('00')
       const data = {oldPass: value.old, newPass: value.new};
       const bodyobj = JSON.stringify(data);
       const request = new Request(`${SharedData.BASE_URL}auth/users/changePassword`,

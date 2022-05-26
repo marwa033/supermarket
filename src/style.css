@@ -13,3 +13,7 @@
     src: url("./assets/fonts/tssoApxBaigK_hnnS_qjtnqWow.woff2")
       format("woff2");
     }
+
+    *{
+      font-family: "Almarai";
+  }

@@ -14,9 +14,10 @@ export class CategoryComponent implements OnInit {
 
   categories:any= [];
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count', 'image' ,'name' ,  'createdAt', 'updatedAt', 'action'];
+  displayedColumns: string[] = ['count', 'image' ,'name' , 'featured' ,'createdAt', 'updatedAt', 'action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   tries: any;
+  featured;
   categoryDropdwn: any;
   typeDetect: string = "products"
   categoryId: string;
@@ -24,7 +25,7 @@ export class CategoryComponent implements OnInit {
   type: string;
   tempStatus;
   tempType;
- 
+ lang = JSON.parse(localStorage.getItem('language'))
   constructor(
     public categoryService: CategoryService,
     private spinner: NgxSpinnerService,
@@ -33,11 +34,12 @@ export class CategoryComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    console.log('html = '+ JSON.parse(localStorage.getItem('language')))
   this.Category()
   }
   Category(){
     this.spinner.show()
-     this.categoryService.GetCategories().
+     this.categoryService.GetCategories(this.lang).
               then( responsedistrictdata => { this.categories = responsedistrictdata.data;
                 // this.categoryDropdwn = responsedistrictdata.data
                  this.dataSource = new MatTableDataSource(responsedistrictdata.data);
@@ -47,7 +49,7 @@ export class CategoryComponent implements OnInit {
                 }, this.categories);
              }
              )
-            }
+  }
   editRow(element) {
     let id = element._id
     this.router.navigate([`dashboard/addcategory/` + id])
@@ -62,7 +64,7 @@ export class CategoryComponent implements OnInit {
   });
 }
   FilterCategory(value){
-    if(this.status != undefined ){
+    if(this.status != undefined || this.featured != undefined){
     this.spinner.show()
       this.categoryService.GetFilterCategory(value).
       then( responsedistrictfilter => { this.categories = responsedistrictfilter.data;

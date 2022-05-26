@@ -1,4 +1,66 @@
-{     "Add Promo Codes" : "إضافة برومو كود",
+{    
+  "Show":"عرض",
+  "Sub Categories":"فئات فرعية",
+  "Products":"منتجات",
+  "createdAt":"انشاء",
+  "updatedAt":"تعديل",
+  "Edit admin":"تعديل مشرف",
+  "Add new admin":"اضف مشرف",
+  "E-mail":"بريد الالكتروني",
+  "Phone Number":"رقم الهاتف",
+  "Change Password":"تغير كلمة السر",
+  "New password":"كلمة السر الجديدة",
+  "Enter your name":"يجب ادخال الاسم",
+  "must email":"يجب ادخال البريد الالكتروني",
+  "Enter your phone number":"يجب ادخال رقم الهاتف ",
+  "Enter password":"يجب ادخال كلمة السر",
+  "Enter Role":"يجب ادخال الوظيفة",
+  "URL":"عنوان url",
+  "Clear" : "مسح",
+  "Edit Ads":"تعديل اعلان",
+  "Enter url":"يجب ادخال عنوان url",
+  "Featured":"متميز",
+  "Enter name in arabic":"يجب ادخال الاسم بالغة العربية",
+  "Enter name in english":"يجب ادخال الاسم بالغة الانجليزية",
+  "Enter the featured":"يجب ادخال المتميز",
+  "category":"الفئة",
+  "afterdiscount":"سعر بعد التخفيض",
+  "subCategory":"فئة فرعية",
+  "featured":"متميز",
+  "discount":"سعر بعد التخفيض",
+  "Enter discount":"يجب ادخال السعر بعد التخفيض",
+  "Enter price":"يجب ادخال السعر",
+  "Enter the subcategory":"يجب ادخال الفئة الفرعية",
+  "Add product":"اضف منتج",
+  "Edit product":"تعديل منتج",
+  "True":"     نعم",
+  "False":"     لا",
+  "Edit category":"تعديل فئة"  ,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  "Add Promo Codes" : "إضافة برومو كود",
   "Group Chat" : "مجموعة محادثة",
   "messages" : "الرسائل",
   "Add Admins" : "إضافة المسؤولين",  
@@ -10,12 +72,6 @@
 "user" : "مستخدم",
 "Show All Bookings" : "عرض جميع الحجوزات",
 "Complete" : "انهاء",
-"Client name" : "اسم العميل",
-"Show All Group Chat" : "عرض جميع مجموعات المحادثات",
-"Show All Messages Chat" : "عرض جميع الرسائل",
-"False" : "خاطئة",
-"All" : "الكل",
-"True" : "صحيح",
 "Active" : "نشط",
 "In active" : "غير نشط",
 "Chat" : "الرسائل",
@@ -329,7 +385,7 @@
    "INBOX": "صندوق الوارد",
    "CHAT": "دردشة",
    "CALENDAR": "التقويم",
-   "EDITOR": "محرر",
+   "EDITOR": "Editor",
    "WYSIWYG EDITOR": "محرر WYSIWYG",
    "CKEDITOR": "Ckeditor",
    "MATERIAL ICONS": "أيقونات المواد",

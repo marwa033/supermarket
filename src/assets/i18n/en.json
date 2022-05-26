@@ -1,4 +1,55 @@
 {  
+"Show":"Show",
+"Sub Categories":"Sub Categories",
+"Products":"Products",
+"createdAt":"createdAt",
+"updatedAt":"updatedAt",
+"Edit admin":"Edit admin",
+"Add new admin":"Add admin",
+"E-mail":"E-mail",
+"Phone Number":"Phone Number",
+"Change Password":"Change Password",
+"New password":"New password",
+"Enter your name":"Please enter name",
+"must email":"Please enter e-mail",
+"Enter your phone number":"Please enter phone number ",
+"Enter password":"Please enter password",
+"Enter Role":"Please enter role",
+"URL":"URL",
+"Clear" : "Clear",
+"Edit Ads":"Edit Ads",
+"Enter url":"Please enter URL",
+"Featured":"Featured",
+"Enter name in arabic":"Please enter name in arabic",
+"Enter name in english":"Please enter name in english",
+"Enter the featured":"Please enter featured",
+"category":"category",
+"afterdiscount":"Price after discount",
+"subCategory":"Sub category",
+"featured":"Featured",
+"discount":"Price after discount",
+"Enter discount":"Please enter price after discount",
+"Enter price":"Please enter price",
+"Enter the subcategory":"Please enter sub category",
+"Add product":"Add product",
+"Edit product":"Edit product",
+"True":"-True",
+"False":"-False",
+"Edit category":"Edit category",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   "Add Promo Codes" : "Add Promo Codes",
   "Group Chat" : "Group Chat",
   "messages" : "Messages",
@@ -9,14 +60,7 @@
 "ID": "ID",
 "Admin" :"Admin",
 "user" : "user",
-"Show All Bookings" : "Show All Bookings",
-"Complete" : "Complete",
-"Client name" : "Client name",
-"Show All Group Chat" : "Show All Group Chat",
-"Show All Messages Chat" : "Show All Messages Chat",
-"False" : "False",
 "All" : "All",
-"True" : "True",
 "Active" : "Active",
 "In active" : "In Active",
 "Chat" : "Chat",
@@ -119,7 +163,7 @@
   "Name" : "Name",
   "Email" : "Email",
   "Phone" : "Phone",
-  "Action" : "Actiion",
+  "Action" : "Action",
   "Profile Information" : "Profile Information",
   "update" : "Update",
   "Show All Category" : "Show All Category",

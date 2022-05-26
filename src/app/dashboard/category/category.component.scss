@@ -1,8 +1,4 @@
-*{
-    direction: rtl;
-    text-align: right;
-    // font-family: "Almarai";
-}
+
 table{
     transition: none !important;
     box-shadow: none !important;
@@ -19,7 +15,6 @@ table{
 .mat-header-cell, .mat-cell {
     min-width: 100px;
     text-align: center;
-    direction: ltr;
 }
 th.mat-header-cell{
     text-align: center !important;

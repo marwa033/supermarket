@@ -1,23 +1,15 @@
 import { Routes } from '@angular/router';
-import { SaasComponent } from './saas/saas.component';
-import { CrmComponent } from './crm/crm.component';
-import { AdddistrictComponent } from './district/adddistrict/adddistrict.component';
-import { DistrictComponent } from './district/district.component';
 import { AddcategoryComponent } from './category/addcategory/addcategory.component';
 import { CategoryComponent } from './category/category.component';
-import { AddAdsComponent } from './ads/add-ads/add-ads.component';
 import { AdsComponent } from './ads/ads.component';
-import { AddPromoComponent } from './promocodes/add-promo/add-promo.component';
-import { PromocodesComponent } from './promocodes/promocodes.component';
-import { AddAdminsComponent } from './admins/add-admins/add-admins.component';
+import { AddAdsComponent } from './ads/add-ads/add-ads.component';
 import { AdminsComponent } from './admins/admins.component';
-import { ClientsComponent } from './clients/clients.component';
+import { AddAdminComponent } from './admins/add-admin/add-admin.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { AddSubComponent } from './sub-categories/add-sub/add-sub.component';
+import { ProductsComponent } from './products/products.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { AddcolorComponent } from './color/addcolor/addcolor.component';
-import { ColorComponent } from './color/color.component';
-import { AddsizeComponent } from './size/addsize/addsize.component';
-import { SizeComponent } from './size/size.component';
 
 
 
@@ -30,18 +22,6 @@ export const DashboardRoutes: Routes = [
    {
       path: '',
       children: [
-         {
-         path: 'district',
-         component: DistrictComponent
-         },
-         {
-         path: 'adddistrict',
-         component: AdddistrictComponent
-         },
-         {
-         path: 'adddistrict/:id',
-         component: AdddistrictComponent
-         },
          {
          path: 'category',
          component: CategoryComponent
@@ -67,16 +47,16 @@ export const DashboardRoutes: Routes = [
          component: AddAdsComponent
          },
          {
-         path: 'promo',
-         component: PromocodesComponent
+         path: 'sub',
+         component: SubCategoriesComponent
          },
          {
-         path: 'addpromo',
-         component: AddPromoComponent
+         path: 'addsub',
+         component: AddSubComponent
          },
          {
-         path: 'addpromo/:id',
-         component: AddPromoComponent
+         path: 'addsub/:id',
+         component: AddSubComponent
          },
          {
          path: 'admins',
@@ -84,49 +64,28 @@ export const DashboardRoutes: Routes = [
          },
          {
          path: 'addadmin',
-         component: AddAdminsComponent
+         component: AddAdminComponent
          },
          {
          path: 'addadmin/:id',
-         component: AddAdminsComponent
+         component: AddAdminComponent
          },
          {
-         path: 'clients',
-         component: ClientsComponent
+         path: 'products',
+         component: ProductsComponent
          },
+         {
+         path: 'addproduct',
+         component: AddProductComponent
+         },
+         {
+         path: 'addproduct/:id',
+         component: AddProductComponent
+         } ,
          {
          path: 'profile',
          component: ProfileComponent
-         },
-         {
-         path: 'changepassword',
-         component: ChangePasswordComponent
-         },
-         {
-         path: 'color',
-         component: ColorComponent
-         },
-         {
-         path: 'addcolor',
-         component: AddcolorComponent
-         },
-         {
-         path: 'addcolor/:id',
-         component: AddcolorComponent
-         },
-         {
-         path: 'size',
-         component: SizeComponent
-         },
-         {
-         path: 'addsize',
-         component: AddsizeComponent
-         },
-         {
-         path: 'addsize/:id',
-         component: AddsizeComponent
-         }
-         
+         },        
          ]
    }
 ];

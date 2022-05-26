@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
-import { CategoryService } from '@syncfusion/ej2-angular-charts';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AdsService } from './ads.service';
@@ -12,68 +11,59 @@ import { AdsService } from './ads.service';
   styleUrls: ['./ads.component.scss']
 })
 export class AdsComponent implements OnInit {
-  products;
+
+  ads:any= [];
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count', 'image' , 'mechanic' , 'winch' ,'endDate', 'createdAt', 'updatedAt', 'action'];
+  displayedColumns: string[] = ['count', 'image' ,'url'  ,'createdAt', 'updatedAt', 'action'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  tries: any;
-  districtsDropdwn: any;
-  categories: any;
-  name: string;
-  categoryId: string;
+  tries;
   status: string;
- 
+ lang = JSON.parse(localStorage.getItem('language'))
   constructor(
     public adsService: AdsService,
-    private toastr : ToastrService,
     private spinner: NgxSpinnerService,
+    private toastr : ToastrService,
     private router: Router) {
     }
 
   ngOnInit(): void {
   this.Ads()
-}
+  }
   Ads(){
     this.spinner.show()
-     this.adsService.Get().
-              then( responsedistrictdata => { this.products = responsedistrictdata.data;
-                 this.dataSource = new MatTableDataSource(responsedistrictdata.data);
+     this.adsService.Get(this.lang).
+              then( responseDate => { this.ads = responseDate.data;
+                // this.categoryDropdwn = responseDate.data
+                 this.dataSource = new MatTableDataSource(responseDate.data);
                  this.dataSource.paginator = this.paginator;
                  setTimeout(() => {
                   this.spinner.hide();
-                }, this.products);
+                }, this.ads);
              }
              )
-            }
+  }
   editRow(element) {
     let id = element._id
     this.router.navigate([`dashboard/addads/` + id])
     }
     
   Active(element){
-    this.spinner.show()
     this.adsService.Activation(element).
     then( responseAds => { this.tries = responseAds;
+      this.status = undefined
       this.Ads()
-     });
+  });
 }
-deleteRow(element){
-  this.spinner.show()
-  this.adsService.Delete(element).
-  then( responseAds => { this.tries = responseAds;
-    this.Ads()
-   });
-}
-  Filter(value){
+  filter(value){
     if(this.status != undefined){
     this.spinner.show()
       this.adsService.GetFilter(value).
-      then( responsedistrictfilter => { this.products = responsedistrictfilter.data;
+      then( responsedistrictfilter => { this.ads = responsedistrictfilter.data;
          this.dataSource = new MatTableDataSource(responsedistrictfilter.data);
          this.dataSource.paginator = this.paginator;
          setTimeout(() => {
           this.spinner.hide();
-        }, this.products);
+        }, this.ads);
       });
     }else{
       this.toastr.error("nothing to search for")
@@ -83,5 +73,8 @@ deleteRow(element){
  action(){
    this.status = undefined;
    this.Ads()
+  //  if(this.subCategoryId != undefined){
+  //   subCategory(element)    
+  //  }
  }
 }

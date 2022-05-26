@@ -22,7 +22,7 @@
                <mat-icon>account_circle</mat-icon>
             </div>
          </button>
-         <!-- <div class="language-dropdown-wrap">
+         <div class="language-dropdown-wrap">
             <button mat-button [matMenuTriggerFor]="menu_activator">
               <img width="24" height="24" [src]="selectImage">
             </button>
@@ -49,14 +49,21 @@
                   </div>
                </div>
             </mat-menu>
-         </div> -->
+         </div>
       </div>
    </mat-toolbar>
    <div class="gene-base-container" #scrollContainer>
-      <div class="inner-container" fxLayout="row wrap">
+      <div *ngIf="layout == 'ltr'" class="inner-container englishContainer" fxLayout="row wrap">
          <div class="full-wid" fxFlex="100">
             <router-outlet></router-outlet>
-            <!-- <ngx-loading-bar></ngx-loading-bar> -->
+         </div>
+         <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
+            <ms-footer></ms-footer>
+         </div>
+      </div>
+      <div *ngIf="layout == 'rtl'" class="inner-container arabicContainer" fxLayout="row wrap">
+         <div class="full-wid" fxFlex="100">
+            <router-outlet></router-outlet>
          </div>
          <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
             <ms-footer></ms-footer>

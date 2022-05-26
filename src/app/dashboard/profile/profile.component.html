@@ -1,16 +1,16 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="adddistrict">
+<div class="add">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header" *ngIf="!updateFlag">
-          البيانات الشخصية
+          {{'Personal Information' | translate}}
         </h4>
         <div class="card-body">
             <form class="example-form" #form="ngForm" >
                 <div class="row">
                 <div class="col-md-6">
                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="nameControl.invalid && nameControl.touched">
-                  <mat-label>الاسم</mat-label>
+                  <mat-label>{{'Name' | translate}}</mat-label>
                   <input matInput 
                   [(ngModel)]="name" 
                   name= "name"  
@@ -18,12 +18,12 @@
                   required
                   readonly
                   #nameControl="ngModel">
-                  <mat-error class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">يجب ادخال الاسم</mat-error>
+                  <!-- <mat-error class="text-danger" *ngIf="nameControl.invalid && nameControl.touched">يجب ادخال الاسم</mat-error> -->
                 </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="emailControl.invalid && emailControl.touched">
-                    <mat-label>البريد الالكترونى</mat-label>
+                    <mat-label>{{'E-mail' | translate}}</mat-label>
                     <input matInput 
                     [(ngModel)]="email" 
                     name= "email"  
@@ -31,12 +31,12 @@
                     required
                     readonly
                     #emailControl="ngModel">
-                    <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">يجب ادخال الاسم البريد الالكترونى</mat-error>
+                    <!-- <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">يجب ادخال الاسم البريد الالكترونى</mat-error> -->
                   </mat-form-field>
             </div>
             <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="phoneControl.invalid && phoneControl.touched">
-              <mat-label>رقم الهاتف</mat-label>
+              <mat-label>{{'Phone Number' | translate}}</mat-label>
               <input matInput 
               [(ngModel)]="phone" 
               name= "phone"  
@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-6">
             <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="typeControl.invalid && typeControl.touched">
-                <mat-label>نوع المشرف</mat-label>
+                <mat-label>{{'Role'  |translate}}</mat-label>
                 <input matInput 
                 [(ngModel)]="type" 
                 name= "type"  
