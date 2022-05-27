@@ -36,6 +36,20 @@
 "True":"-True",
 "False":"-False",
 "Edit category":"Edit category",
+"code": "Code",
+"for":"For",
+"days" : "Days",
+"amount" : "Amount",
+"Edit Promocode":"Edit Promocode",
+"startDate":"Start date",
+"daysPeriod" : "Days",
+"totalUsage":"Total usage",
+"maxNumberOfUses":"Max number of uses",
+"type":"Type",
+"maxOrder":"Max Order",
+"minOrder" :"Min Order",
+"Add Promocode":"Add Promocode",
+"Orders" : "Orders",
 
 
 
@@ -50,7 +64,7 @@
 
 
 
-  "Add Promo Codes" : "Add Promo Codes",
+  "Add PromoCode" : "Add PromoCode",
   "Group Chat" : "Group Chat",
   "messages" : "Messages",
   "Add Admins" : "Add Admins",

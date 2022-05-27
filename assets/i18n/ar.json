@@ -36,6 +36,20 @@
   "True":"     نعم",
   "False":"     لا",
   "Edit category":"تعديل فئة"  ,
+  "code": "كود",
+  "for":"الى",
+  "days" : "الايام",
+  "amount" : "العدد",
+  "Edit Promocode":"تعديل برومو كود",
+  "startDate":"تاريخ البدء",
+  "daysPeriod" : "الايام",
+  "totalUsage":"اجمالى الاستخدام",
+  "maxNumberOfUses":"اكثر رقم للاستخدام",
+  "type":"نوع",
+  "maxOrder":"اكثر طلب",
+  "minOrder" :"اقل طلب",
+  "Add Promocode":"اضف برومو كود",
+  "Orders" : "الطلبات",
   
   
   
@@ -60,7 +74,7 @@
   
   
   
-  "Add Promo Codes" : "إضافة برومو كود",
+  "Add PromoCode" : "إضافة برومو كود",
   "Group Chat" : "مجموعة محادثة",
   "messages" : "الرسائل",
   "Add Admins" : "إضافة المسؤولين",  
@@ -247,6 +261,7 @@
 "Doctor name" :"اسم الطبيب",
 "Visitor name": "اسم الزائر",
 "Not completed":"غير منتهى",
+"Add":"اضف",
 
 
 
@@ -262,7 +277,7 @@
    "Components" : "المكونات",
    "UI Elements" : "عناصر واجهة المستخدم",
    "Pages" : "صفحات",
-   "Add" : "إضافة",
+   "Add" : "اضف",
    "USER PROFILE V2" : "ملف تعريف المستخدم V2",
    "Select" : "تحديد",
    "Checkbox" : "مربع",
