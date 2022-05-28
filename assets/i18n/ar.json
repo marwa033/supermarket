@@ -50,6 +50,12 @@
   "minOrder" :"اقل طلب",
   "Add Promocode":"اضف برومو كود",
   "Orders" : "الطلبات",
+  "subTotal":"الاجمالى",
+  "orderId":"رقم الطلب",
+  "Change state":"تغير الحالة",
+  "date":"التاريخ",
+  "deliveryFees" : "التوصيل",
+  "Order Details":"تفاصيل الطلب",
   
   
   

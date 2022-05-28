@@ -50,6 +50,12 @@
 "minOrder" :"Min Order",
 "Add Promocode":"Add Promocode",
 "Orders" : "Orders",
+"subTotal":"sub Total",
+"orderId":"OrderId",
+"Change state":"Change state",
+"date":"Date",
+"deliveryFees" : "deliveryFees",
+"Order Details":"Order Details",
 
 
 
