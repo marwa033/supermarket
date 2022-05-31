@@ -56,6 +56,11 @@
 "date":"Date",
 "deliveryFees" : "deliveryFees",
 "Order Details":"Order Details",
+"Configuration":"Configuration",
+"createdAt":"Created At",
+"updatedAt":"Updated At",
+"deliveryFee":"delivery Fees",
+"invitationPoints":"invitation Points",
 
 
 

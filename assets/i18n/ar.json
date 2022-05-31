@@ -56,6 +56,11 @@
   "date":"التاريخ",
   "deliveryFees" : "التوصيل",
   "Order Details":"تفاصيل الطلب",
+  "Configuration":"ترتيب",
+  "createdAt":"انشاء",
+  "updatedAt":"تعديل",
+  "deliveryFee":"رسوم التوصيل",
+  "invitationPoints":"نقاط  ",
   
   
   
