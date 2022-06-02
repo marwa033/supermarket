@@ -98,6 +98,15 @@
   "Carried Orders":"طلبات حمل",
   "Completed Orders":"طلبات مكتمله",
   "All Orders":"جميع الطلبات",
+  "title":"العنوان",
+  "apartment":"شقة",
+  "floor":"الدور",
+  "building":"مبنى",
+  "street":"الشارع",
+  "areaName":"اسم المنطقة",
+  "cityName":"اسم المدينة",
+  "landmark":"معلم معروف",
+  "Address":"العنوان",
   
   
   

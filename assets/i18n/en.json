@@ -98,6 +98,15 @@
 "Carried Orders":"Carried Orders",
 "Completed Orders":"Completed Orders",
 "All Orders":"All Orders",
+"title":"Title",
+"apartment":"Apartment",
+"floor":"Floor",
+"building":"Building",
+"street":"Street",
+"areaName":"Area Name",
+"cityName":"City Name",
+"landmark":"Landmark",
+"Address":"Address",
 
 
 
