@@ -107,7 +107,13 @@
 "cityName":"City Name",
 "landmark":"Landmark",
 "Address":"Address",
-
+"changeState":"changeState",
+"cancel":"cancel",
+"order details":"Order Details",
+"edit":"Edit",
+"active":"Active",
+"inactive":"InActive",
+"delete":"Delete",  
 
 
 
