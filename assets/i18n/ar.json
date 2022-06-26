@@ -113,13 +113,23 @@
   "edit":"تعديل",
   "active":"نشط",
   "inactive":"غير نشط",
-  "delete":"مسح",  
-  
-  
-  
-  
-  
-  
+  "delete":"مسح", 
+  "wallet":"محفظة",
+  "clientId":"رقم العميل", 
+"clients":"العملاء",
+"fromWallet":"من المحفظة",
+"note":"ملحوظة",
+"status":"الحالة",
+"paymentOrderId":"رقم أمر الدفع",
+"Client information":"معلومات العميل",
+"Client Address":"عنوان العميل",
+"Quantity":"كمية",
+"SubCategories":"فئات فرعية",
+"Promocodes":"بروموكود",
+"EditSubcategory":"تعديل فئة فرعية",
+"AddSubcategory":"اضاف فئة فرعية",
+"Add category":"اضاف فئة",
+"Edit category":"تعديل فئة",
   
   
   
