@@ -130,6 +130,13 @@
 "AddSubcategory":"Add Sub Category",
 "Add category":"Add Category",
 "Edit category":"Edit Category",
+"inventory": "Inventory",
+"Description in english":"Description in english",
+"Description in arabic":"Description in arabic",
+"Change Wallet ":"Change Wallet ",
+"orderedCart":"Ordered Cart",
+"processingCart" : "Processing Cart",
+
 
 
 

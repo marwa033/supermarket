@@ -130,6 +130,12 @@
 "AddSubcategory":"اضاف فئة فرعية",
 "Add category":"اضاف فئة",
 "Edit category":"تعديل فئة",
+"inventory": "جرد",
+"Description in english":"الوصف باللغة الإنجليزية",
+"Description in arabic":"الوصف باللغةالعربية",
+"Change Wallet ":"تغير المحفظة",
+"orderedCart":"منتجات طلبت",
+"processingCart" : "منتجات قيد الطلب",
   
   
   
