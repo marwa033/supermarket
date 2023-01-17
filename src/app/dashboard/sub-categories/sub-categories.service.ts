@@ -90,7 +90,7 @@ return this.result
 
 
 async Activation(element) {
-  const data = {_id:element._id};
+  const data = {ids:element};
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}components/subCategories/changeState`,
 {
@@ -131,25 +131,41 @@ async GetFilter(value) {
   if(value.status === ""){
     value.status = undefined
   }
-  if(value.featured === ""){
-    value.featured = undefined
+  if(value.name === ""){
+    value.name = undefined
   }
-  if(value.featured != undefined && value.status === undefined){
+  if(value.categoryId === ""){
+    value.categoryId = undefined
+  }
+  if(value.name != undefined && value.status === undefined && value.categoryId === undefined){
 
-    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?featured=`+value.featured,
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?name=`+value.name,
     { method: 'GET',}
     )
-  }else if(value.status != undefined && value.featured === undefined){
+  }else if(value.status != undefined && value.name === undefined && value.categoryId === undefined){
 
     var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?state=` +value.status,
     { method: 'GET',}
     )
-  }else if(value.status != undefined && value.featured != undefined){
-    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?state=` +value.status+'&featured='+value.featured,
+  }else if(value.status != undefined && value.name != undefined && value.categoryId === undefined){
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?state=` +value.status+'&name='+value.name,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined && value.name === undefined && value.categoryId != undefined){
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?categoryId=` +value.categoryId,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined && value.name != undefined && value.categoryId != undefined){
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?categoryId=` +value.categoryId+'&name='+value.name,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined && value.name === undefined && value.categoryId != undefined){
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?categoryId=` +value.categoryId+'&state='+value.status,
     { method: 'GET',}
     )
   }else{
-    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories`,
+    var newRequest = new Request(`${SharedData.BASE_URL}components/subCategories?categoryId=` +value.categoryId+'&state='+value.status
+    +'&name='+value.name,
     { method: 'GET',}
     )
   }

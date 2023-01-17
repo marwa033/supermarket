@@ -1,5 +1,8 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="add">
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+  <span>No Authorization</span>
+</div>
+<div class="add" *ngIf="AdminRole != 'editor'">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header"
@@ -39,8 +42,8 @@
             </div>
             <section class="col-md-6">
               <label >{{ 'featured' | translate}}</label><br>
-              <input type="radio" name="featured" [(ngModel)]="featured" value=true>{{'True'|translate}}<br>
-              <input type="radio" name="featured" [(ngModel)]="featured" value=false>{{'False' |translate}}
+              <input type="radio" style="margin:0 10px 0 0" name="featured" [(ngModel)]="featured" value=true>{{'Yes'|translate}}<br>
+              <input type="radio" style="margin:0 10px 0 0" name="featured" [(ngModel)]="featured" value=false>{{'No' |translate}}
             </section>
       <!-- <section class="col-md-6">
         <mat-form-field appearance="fill" [class.has-error]="featuredControl.invalid && featuredControl.touched">

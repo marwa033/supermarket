@@ -66,6 +66,7 @@
     "hammerjs": "^2.0.8",
     "intl": "^1.2.5",
     "jquery": "^3.3.1",
+    "jspdf": "^2.5.1",
     "leaflet": "^1.4.0",
     "leaflet-map": "^0.2.1",
     "mat-color-picker": "^1.4.3",
@@ -109,6 +110,7 @@
     "ts-helpers": "^1.1.2",
     "videogular2": "^6.4.0",
     "web-animations-js": "^2.3.1",
+    "xlsx": "^0.18.5",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
@@ -117,7 +119,7 @@
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "^8.0.0",
     "@types/jasmine": "^3.3.13",
-    "@types/jquery": "^3.3.29",
+    "@types/jquery": "^3.5.14",
     "@types/node": "^12.12.47",
     "@types/nvd3": "^1.8.39",
     "codelyzer": "^5.1.0",

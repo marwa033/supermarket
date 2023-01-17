@@ -57,6 +57,16 @@ import { AddSubComponent } from './sub-categories/add-sub/add-sub.component';
 import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AddOrderComponent } from './orders/add-order/add-order.component';
+import { PromocodesComponent } from './promocodes/promocodes.component';
+import { ClientsComponent } from './clients/clients.component';
+import { AddPromoComponent } from './promocodes/add-promo/add-promo.component';
+import { ConfigComponent } from './config/config.component';
+import { CityComponent } from './city/city.component';
+import { AddCityComponent } from './city/add-city/add-city.component';
+import { NewOrderComponent } from './orders/new-order/new-order.component';
 
 @NgModule({
 	declarations: [
@@ -71,6 +81,16 @@ import { ProfileComponent } from './profile/profile.component';
 		ProductsComponent,
 		AddProductComponent,
 		ProfileComponent,
+		HomeComponent,
+		OrdersComponent,
+		AddOrderComponent,
+		PromocodesComponent,
+		ClientsComponent,
+		AddPromoComponent,
+		ConfigComponent,
+		CityComponent,
+		AddCityComponent,
+		NewOrderComponent,
 	],
 	imports: [ GridModule,
 		ListViewModule ,

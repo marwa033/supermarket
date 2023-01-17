@@ -1,5 +1,9 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="add">
+
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+    <span>No Authorization</span>
+  </div>
+<div class="add" *ngIf="AdminRole != 'editor'">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header"
@@ -14,16 +18,15 @@
             <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
                 <div class="row">
             <div class="col-md-6">
-                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="urlControl.invalid && urlControl.touched">
+                <mat-form-field class="example-full-width" appearance="fill" 
+                >
                     <mat-label>{{'URL' | translate}}</mat-label>
                     <input matInput 
                     type="url"
                     [(ngModel)]="url" 
                     name= "url"
-                    required
-                    autocomplete="off"
-                    #urlControl="ngModel">
-                    <mat-error class="text-danger" *ngIf="urlControl.invalid && urlControl.touched">{{'Enter url' | translate}}</mat-error>
+                    autocomplete="off">
+                    <!-- <mat-error class="text-danger" *ngIf="urlControl.invalid && urlControl.touched">{{'Enter url' | translate}}</mat-error> -->
                 </mat-form-field>
             </div>
             <div class="col-md-6">

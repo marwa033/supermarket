@@ -1,0 +1,109 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+<div class="show container">
+    <form #form="ngForm" (ngSubmit)="Filter(form.value)">
+     <div class="row">
+      <section class="col-md-3">
+        <mat-form-field >
+          <mat-label>{{'State' | translate}}</mat-label>
+          <mat-select [(ngModel)]="status" name="status">
+            <mat-option value="active">{{'Active' | translate}}</mat-option>
+            <mat-option value="inActive">{{'InActive' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+       </section>
+       <section class="col-md-3 mt-2">
+         <mat-form-field >
+          <mat-label>{{'Name' | translate}}</mat-label>
+          <input matInput [(ngModel)]="name" name="name">
+         </mat-form-field>
+        </section>
+       <section class="col-md-3 mb-2" style="display: flex;">
+        <button mat-raised-button color="accent">{{'Search' | translate}}</button>
+        <button mat-raised-button color="warn" type="button" (click)="action()">{{'Clear' | translate}}</button>
+       </section>
+     </div>
+     <!-- <div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="categories.length === 0">
+      <span>{{'No data to show' | translate}}</span>
+      <mat-icon class="pointer" 
+      (click)="action()">undo</mat-icon>
+    </div> -->
+    <div class="mat-elevation-z8 example-container" > 
+
+    <table mat-table [dataSource]="dataSource" >  
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+          (change)="selectHandler(row)"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+       <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
+      </ng-container>
+<!-- 
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef > {{'Image' | translate}} </th>
+        <td mat-cell *matCellDef="let element" > 
+          <img [src]="element.image" class="showImage" onerror= "this.src='assets/img/1274512-placeholder.png';"/> 
+        </td>
+        
+      </ng-container>       -->
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef > {{'Name' | translate}} </th>
+          <td mat-cell *matCellDef="let element" > {{element.name }} </td>
+          
+        </ng-container>
+
+        <ng-container matColumnDef="shippingFees">
+          <th mat-header-cell *matHeaderCellDef > {{'shippingFees' | translate}} </th>
+          <td mat-cell *matCellDef="let element" > {{element.shippingFees}} </td>
+        </ng-container>
+        
+        <!-- Weight Column -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef> {{'updatedAt' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'d/M/yyy'}} </td>
+        </ng-container>
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> {{'createdAt' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'d/M/yyy' }} </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon style="color:dodgerblue"class="pointer"  title="{{'edit' | translate}}" 
+            (click)="editRow(element)" *ngIf="AdminRole != 'editor'" >
+              edit </mat-icon>  
+              <mat-icon title="{{'none' | translate}}" *ngIf="AdminRole == 'editor' " >
+                minimize </mat-icon> 
+          <mat-icon style="color:#ffae00;cursor: pointer;" title="{{'inactive' | translate}}"
+           *ngIf="element.state === 'inActive' && AdminRole != 'editor'" (click)="Active(element)">highlight_off</mat-icon>  
+          <mat-icon style="color:green;cursor: pointer;" title="{{'active' | translate}}"
+           *ngIf="element.state === 'active' && AdminRole != 'editor'" (click)="Active(element)">check_circle_outline</mat-icon>
+        </td>
+        </ng-container>
+        
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+  </form>
+  </div>
+
+  

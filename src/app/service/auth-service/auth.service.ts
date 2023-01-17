@@ -125,6 +125,52 @@ export class AuthService {
       this.adminRole(this.result.adminType)
       return this.result;
     }
+    async Home() {
+      const request = new Request(`${SharedData.BASE_URL}core/analytics`,
+      { method: 'GET',
+      });
+            request.headers.delete('Content-Type');
+            request.headers.append('Content-Type', 'application/json');
+           request.headers.append('x-auth-token', this.userData);
+              request.headers.append('lang', 'en');
+            const response = await fetch( request);
+      const responsedata = await response.json();
+      this.result = responsedata;
+      return this.result;
+    }
+
+    async updateConfig(value){
+      const data = {deliveryFee:value.deliveryFee, invitationPoints:value.invitationPoints, maxOrderFreeShipping: value.maxOrderFreeShipping};
+      const bodyobj = JSON.stringify(data);
+      const request = new Request(`${SharedData.BASE_URL}core/configs`,
+      { method: 'POST',
+      body: bodyobj
+      });
+            request.headers.delete('Content-Type');
+            request.headers.append('Content-Type', 'application/json');
+           request.headers.append('x-auth-token', this.userData);
+              request.headers.append('lang', 'en');
+            const response = await fetch( request);
+      const responsedata = await response.json();
+      this.result = responsedata;
+      this.toastr.success("Successfully Updated")
+      return this.result;
+   }
+
+    
+   async Config() {
+      const request = new Request(`${SharedData.BASE_URL}core/configs`,
+      { method: 'GET',
+      });
+            request.headers.delete('Content-Type');
+            request.headers.append('Content-Type', 'application/json');
+           request.headers.append('x-auth-token', this.userData);
+              request.headers.append('lang', 'en');
+            const response = await fetch( request);
+      const responsedata = await response.json();
+      this.result = responsedata;
+      return this.result;
+    }
 
     adminRole(value){
    	localStorage.setItem("adminRole", JSON.stringify(value));      

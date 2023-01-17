@@ -1,14 +1,17 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="add">
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+  <span>No Authorization</span>
+</div>
+<div class="add" *ngIf="AdminRole != 'editor'">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header"
         *ngIf="!updateFlag">
-          {{'Add category' | translate}}
+          {{'AddSubcategory' | translate}}
         </h4>
         <h4 class="card-header"
         *ngIf="updateFlag">
-          {{'Edit category' | translate}} 
+          {{'EditSubcategory' | translate}} 
         </h4>
         <div class="card-body">
             <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">

@@ -1,9 +1,9 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
 
-<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole === 'editor'">
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole != 'super'">
   <span>No Authorization</span>
 </div>
-<div class="add" *ngIf="AdminRole != 'editor'">
+<div class="add" *ngIf="AdminRole == 'super'">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header" *ngIf="!updateFlag">
@@ -34,11 +34,12 @@
                     [(ngModel)]="email" 
                     name= "email"  
                     autocomplete="off"
+                    style="text-transform: none;"
                     required
                     email
                     #emailControl="ngModel">
                     <mat-error class="text-danger" *ngIf="emailControl.invalid && emailControl.touched">{{'must email' | translate}}</mat-error>
-                    <mat-error class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">{{'Incorrect e-mail' | translate}}</mat-error>
+                    <!-- <mat-error class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">{{'Incorrect e-mail' | translate}}</mat-error> -->
                   </mat-form-field>
             </div>
             <div class="col-md-6">

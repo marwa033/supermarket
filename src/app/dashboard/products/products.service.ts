@@ -14,9 +14,26 @@ export class ProductsService {
   lang="en";
   ads: any;
   constructor(private toastr : ToastrService,
-    private router: Router,) { }
+    private router: Router,) {
+     }
     
-  async Get(lang) {
+  async Get(lang,sort) {
+    console.log(lang)
+    this.lang = lang;
+    const request = new Request(`${SharedData.BASE_URL}components/products?sortByInventory=`+sort,
+    { method: 'GET',
+    });
+          request.headers.delete('Content-Type');
+          request.headers.append('Content-Type', 'application/json');
+         request.headers.append('x-auth-token', this.token);
+            request.headers.append('lang', lang);
+          const response = await fetch( request);
+    const responsedata = await response.json();
+    this.results = responsedata;
+    return this.results;
+  }
+  async GetOnly(lang) {
+    console.log(lang)
     this.lang = lang;
     const request = new Request(`${SharedData.BASE_URL}components/products`,
     { method: 'GET',
@@ -33,7 +50,7 @@ export class ProductsService {
 
   
 async Activation(element) {
-  const data = {_id:element._id};
+  const data = {ids:element};
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}components/products/changeState`,
 {
@@ -50,14 +67,136 @@ request.headers.append('x-auth-token', this.token);
   return this.active;
 }
 
-async GetFilter(value) {
+async GetFilter(value,sort) {
   console.log('*')
   if(value.status === ""){
     value.status = undefined
   }
-  const request =  new Request(`${SharedData.BASE_URL}components/products?state=` +value.status,
+  if(value.name === ""){
+    value.name = undefined
+  }
+  if(value.subId === ""){
+    value.subId = undefined
+  }
+  if(value.categoryId === ""){
+    value.categoryId = undefined
+  }
+  if(value.featured === ""){
+    value.featured = undefined
+  }
+  if(value.status != undefined && value.name != undefined&& value.subId === undefined && value.categoryId === undefined && value.featured === undefined){
+  var newRequest =  new Request(`${SharedData.BASE_URL}components/products?state=` +value.status +'&name='+value.name+'&sortByInventory='+sort,
   { method: 'GET',}
-  );
+  )
+}else if(value.status != undefined && value.subId != undefined && value.name === undefined && value.categoryId === undefined && value.featured === undefined){
+  var newRequest =  new Request(`${SharedData.BASE_URL}components/products?state=` +value.status +'&subCategoryId='+value.subId+'&sortByInventory='+sort,
+  { method: 'GET',}
+  )}
+  else if(value.name != undefined && value.subId != undefined && value.status === undefined && value.categoryId === undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?name=` +value.name +'&subCategoryId='+value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.name != undefined && value.status === undefined&& value.subId === undefined && value.categoryId === undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?name=` +value.name +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.subId != undefined&& value.name === undefined&& value.status === undefined && value.categoryId === undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?subCategoryId=`+value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name === undefined&& value.subId === undefined && value.categoryId === undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?state=`+value.status +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }  else if(value.status === undefined&& value.name === undefined&& value.subId === undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name === undefined&& value.subId != undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&subCategoryId='+ value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name != undefined&& value.subId === undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&name='+ value.name +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name == undefined && value.subId === undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&state='+ value.status +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name != undefined && value.subId === undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&state='+ value.status + '&name='+ value.name +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name === undefined && value.subId != undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&state='+ value.status + '&subCategoryId='+ value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name != undefined && value.subId != undefined && value.categoryId != undefined && value.featured === undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?categoryId=`+value.categoryId + '&name='+ value.name + '&subCategoryId='+ value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name === undefined && value.subId === undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name === undefined && value.subId === undefined && value.categoryId != undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&categoryId='+ value.categoryId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name === undefined && value.subId != undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&subCategoryId='+ value.subId +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name != undefined && value.subId === undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&name='+ value.name +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name === undefined && value.subId === undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&state='+ value.status +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name != undefined && value.subId === undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&state='+ value.status +'&name='+ value.name +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name === undefined && value.subId != undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&state='+ value.status +'&subCategoryId='+ value.subId
+    +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name === undefined && value.subId === undefined && value.categoryId != undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&state='+ value.status +'&categoryId='+ value.categoryId
+    +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name != undefined && value.subId != undefined && value.categoryId === undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&name='+ value.name +'&subCategoryId='+ value.subId
+    +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name != undefined && value.subId == undefined && value.categoryId != undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&name='+ value.name +'&categoryId='+ value.categoryId
+    +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status === undefined&& value.name === undefined && value.subId != undefined && value.categoryId != undefined && value.featured != undefined){
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?featured=`+value.featured +'&subCategoryId='+ value.subId +'&categoryId='+ value.categoryId 
+    +'&sortByInventory='+sort,
+    { method: 'GET',}
+    )
+  }else if(value.status != undefined&& value.name != undefined && value.subId != undefined && value.categoryId != undefined
+     && value.featured != undefined){
+      var newRequest =  new Request(`${SharedData.BASE_URL}components/products?name=` +value.name +'&subCategoryId='+value.subId +'&state='+value.status +'&categoryId='+value.categoryId
+      +'&featured='+value.featured +'&sortByInventory='+sort,
+      { method: 'GET',}
+      )
+  } else {
+    var newRequest =  new Request(`${SharedData.BASE_URL}components/products?sortByInventory=`+sort,
+    { method: 'GET',}
+    )
+  }
+  const request = newRequest;
         request.headers.delete('Content-Type');
         request.headers.append('Content-Type', 'application/json');
        request.headers.append('x-auth-token', this.token);
@@ -88,6 +227,8 @@ async Add(value) {
   }
   const data = {priceAfterDiscount: value.discount, price:value.price,
     image:value.imageSrc,name:{ en: value.enname , ar: value.arname}, 
+    description:{ en: value.enDescription , ar: value.arDescription},
+    inventory: value.inventory, tags: value.tags,
     featured: value.featured,subCategoryId:value.subCategoryId};  
   const bodyobj = JSON.stringify(data);
   const request = new Request(`${SharedData.BASE_URL}components/products`, {
@@ -122,7 +263,11 @@ async Update(value,id) {
     value.featured = false
   }
 const data = {priceAfterDiscount: value.discount, price:value.price,
- image:value.imageSrc,name:{ en: value.enname , ar: value.arname}, featured: value.featured,subCategoryId:value.subCategoryId,
+ image:value.imageSrc,tags: value.tags,
+ name:{ en: value.enname , ar: value.arname},  
+ description:{ en: value.enDescription , ar: value.arDescription},
+ inventory: value.inventory,
+ featured: value.featured,subCategoryId:value.subCategoryId,
  _id: id};  
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}components/products`, {

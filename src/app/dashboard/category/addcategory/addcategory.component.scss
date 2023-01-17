@@ -16,8 +16,7 @@ button{
 .rid{
     display: none;
     }img{
-        width: 150px;
-        height: 150px;
+        width: 150px; height:auto;
+        max-height: 150px;
         padding:5px;
-        border-radius: 50%;
     }

@@ -1,0 +1,194 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+<div class="show container">
+    <form #form="ngForm" (ngSubmit)="filter(form.value)">
+     <div class="row">
+      <section class="col-md-3">
+        <mat-form-field >
+          <mat-label>{{'State' | translate}}</mat-label>
+          <mat-select [(ngModel)]="status" name="status">
+            <mat-option value="pending">{{'pending' | translate}}</mat-option>
+            <mat-option value="processing">{{'processing' | translate}}</mat-option>
+            <mat-option value="carried">{{'carried' | translate}}</mat-option>
+            <mat-option value="completed">{{'completed' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+       </section>
+       <section class="col-md-3">
+        <mat-form-field >
+          <mat-label>{{'paymentMethod' | translate}}</mat-label>
+          <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
+            <mat-option value="cash">{{'cash' | translate}}</mat-option>
+            <mat-option value="online">{{'online' | translate}}</mat-option>
+            <mat-option value="both">{{'both' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+       </section>
+       <section class="col-md-3 mt-2">
+        <mat-form-field >
+          <mat-label>{{'Client' | translate}}</mat-label>
+          <input matInput [(ngModel)]="clientId" name="clientId">
+          <!-- <mat-select >
+            <mat-option *ngFor="let client of clients" [value]=client._id>{{client.user.name}}</mat-option>
+          </mat-select> -->
+        </mat-form-field>
+       </section>
+       
+       <section class="col-md-3 mt-2">
+        <mat-form-field >
+          <mat-label>{{'orderId' | translate}}</mat-label>
+          <input matInput [(ngModel)]="orderId" name="orderId">
+          <!-- <mat-select [(ngModel)]="orderId" name="orderId">
+            <mat-option *ngFor="let order of newOrders" [value]=order.orderId>{{order.orderId}}</mat-option>
+          </mat-select> -->
+        </mat-form-field>
+       </section>
+       <section class="col-md-3 mt-2">
+         <mat-form-field >
+           <mat-label>{{'from' | translate}}</mat-label>
+           <input matInput [matDatepicker]="picker"
+           [(ngModel)]="from" name="from">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+         </mat-form-field>
+        </section>
+        
+        <section class="col-md-3 mt-2">
+          <mat-form-field >
+            <mat-label>{{'to' | translate}}</mat-label>
+            <input matInput [matDatepicker]="pickerto"
+            [(ngModel)]="to" name="to">
+           <mat-datepicker-toggle matSuffix [for]="pickerto"></mat-datepicker-toggle>
+           <mat-datepicker #pickerto></mat-datepicker>
+          </mat-form-field>
+         </section>
+         
+       <section class="col-md-3 mt-2">
+        <mat-form-field >
+          <mat-label>{{'Client Name' | translate}}</mat-label>
+          <input matInput [(ngModel)]="clientName" name="clientName">
+        </mat-form-field>
+       </section>
+       <section class="col-md-3 mt-2">
+        <mat-form-field >
+          <mat-label>{{'Client Phone' | translate}}</mat-label>
+          <input matInput [(ngModel)]="clientPhone" name="clientPhone">
+        </mat-form-field>
+       </section>
+      </div>
+      <div class="row justify-content-end" style="padding: 0 15px;">
+       <section class="mb-2" style="display: flex;">
+        <button mat-raised-button color="accent">{{'Search' | translate}}</button>
+        <button mat-raised-button color="warn" type="button" (click)="action()">{{'Clear' | translate}}</button>
+        <button mat-raised-button color="primary" type="button" (click)="ExportTOExcel()">{{'Export' | translate}}</button>
+       </section>
+     </div>
+     <!-- <div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="orders.length === 0">
+      <span>{{'No data to show' | translate}}</span>
+      <mat-icon class="pointer" 
+      (click)="action()">undo</mat-icon>
+    </div> -->
+
+   
+  
+  <div class="mat-elevation-z8 example-container" > 
+
+    <table mat-table  [dataSource]="dataSource" >
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+          (change)="selectHandler(row)"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+       <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
+      </ng-container> 
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="orderId">
+          <th mat-header-cell *matHeaderCellDef > {{'orderId' | translate}} </th>
+          <td mat-cell *matCellDef="let element" > {{element.orderId }} </td>
+          
+        </ng-container>
+      
+    <!-- Position Column -->
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef > {{'State' | translate}} </th>
+      <td mat-cell *matCellDef="let element" > {{element.state }} </td>
+      
+    </ng-container>
+          
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef > {{'price' | translate}} </th>
+            <td mat-cell *matCellDef="let element" > {{element.price}}  
+               </td>
+          </ng-container>
+          
+        <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef > {{'paymentMethod' | translate}} </th>
+            <td mat-cell *matCellDef="let element" > {{element.paymentMethod}}  
+               </td>
+          </ng-container>
+          
+       <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> {{'date' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{ element.date }} </td>
+        </ng-container>
+      
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}}
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon class="pointer"  title="{{'order details' | translate}}" (click)="editRow(element)"> list_alt </mat-icon>
+                  <mat-icon style="color:darkorange" *ngIf="element.state != 'canceled'"
+                  class="pointer"  title="{{'cancel' | translate}}" (click)="cancelRow(element)" >cancel_presentation</mat-icon>  
+                <mat-icon [matMenuTriggerFor]="menu" style="color:crimson"class="pointer"  
+                title="{{'changeState' | translate}}" *ngIf="element.state != 'canceled'">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <label style="margin: 0px 20px;
+                    border-bottom: 1px solid;
+                    font-weight: bold;">{{'Change state' | translate}}</label>
+                    <button mat-menu-item (click)="Active(element,'pending')">{{'pending' | translate}}</button>
+                    <button mat-menu-item (click)="Active(element,'processing')">{{'processing' | translate}}</button>
+                    <button mat-menu-item (click)="Active(element,'carried')">{{'carried' | translate}}</button>
+                    <button mat-menu-item (click)="Active(element,'completed')">{{'completed' | translate}}</button>
+                  </mat-menu>  
+              </td>
+              </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+  </form>
+  </div>
+
+   
+  <!-- <p (click)="ExportTOExcel()">Export as Excel</p> -->
+   <table id="table" style="display:none;">
+    <tr>
+    <th>{{'ID' | translate}}</th>
+    <th>{{'orderId' | translate}}</th>
+    <th>{{'State' | translate}}</th>
+    <th>{{'price' | translate}}</th>
+    <th>{{ 'paymentMethod' | translate}}</th>
+    <th>{{'date' | translate}}</th>
+  </tr>
+  <tr *ngFor="let element of orders; let i = index">
+    <td>{{i+1}}</td>
+    <td>{{element.orderId}}</td>
+    <td>{{element.state}}</td>
+    <td>{{element.price}}</td>
+    <td>{{element.paymentMethod}}</td>
+    <td>{{element.date}}</td>
+  </tr>    
+   </table>

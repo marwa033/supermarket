@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
@@ -14,11 +15,14 @@ export class AdsComponent implements OnInit {
 
   ads:any= [];
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count', 'image' ,'url'  ,'createdAt', 'updatedAt', 'action'];
+  displayedColumns: string[] = ['select','count', 'image' ,'url'  ,'createdAt', 'updatedAt', 'action'];
+  selection = new SelectionModel<unknown>(true, []);
+  list: any = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   tries;
   status: string;
- lang = JSON.parse(localStorage.getItem('language'))
+ lang = JSON.parse(localStorage.getItem('language'));
+ AdminRole = JSON.parse(localStorage.getItem("adminRole"));
   constructor(
     public adsService: AdsService,
     private spinner: NgxSpinnerService,
@@ -27,7 +31,8 @@ export class AdsComponent implements OnInit {
     }
 
   ngOnInit(): void {
-  this.Ads()
+  this.Ads();
+  console.log(this.AdminRole)
   }
   Ads(){
     this.spinner.show()
@@ -48,10 +53,15 @@ export class AdsComponent implements OnInit {
     }
     
   Active(element){
-    this.adsService.Activation(element).
+    if(this.list.length == 0){
+      this.list.push(element._id)
+    }
+    this.adsService.Activation(this.list).
     then( responseAds => { this.tries = responseAds;
       this.status = undefined
       this.Ads()
+      this.selection.clear();
+      this.list.length = 0;
   });
 }
   filter(value){
@@ -70,11 +80,61 @@ export class AdsComponent implements OnInit {
     }
 
  }
+ 
+ delete(element){
+  if(this.list.length == 0){
+    this.list.push(element._id)
+  }
+  var yes = confirm("Are you sure you want to delete?");
+  if(yes === true){
+    this.adsService.Delete(this.list).
+    then( responseAds => { this.ads = responseAds;
+      this.Ads()
+    });
+  }else{
+
+  }
+  this.selection.clear();
+  this.list.length = 0;
+}
+
+selectHandler(val) {
+  this.selection.toggle(val);
+  if (this.list.includes(val._id)) {
+    let index = this.list.indexOf(val._id);
+    this.list.splice(index, 1);
+  } else {
+    this.list.push(val._id);
+  }
+  console.log(this.list);
+}
+
+isAllSelected() {
+  const numSelected = this.selection.selected.length;
+  const numRows = this.dataSource.data.length;
+  return numSelected === numRows;
+}
+clearSelection(){
+  this.selection.clear();
+  this.list.length = 0
+  console.log(this.list)
+}
+selectAll(){
+  this.list.length = 0;
+  this.dataSource.data.forEach(row => this.selection.select(row));
+  this.ads.forEach(element => {
+    this.list.push(element._id)
+  });
+  console.log(this.list)
+}
+/** Selects all rows if they are not all selected; otherwise clear selection. */
+masterToggle() {
+  this.isAllSelected() ? 
+  this.clearSelection() :
+  this.selectAll()
+}
  action(){
    this.status = undefined;
    this.Ads()
-  //  if(this.subCategoryId != undefined){
-  //   subCategory(element)    
-  //  }
  }
 }

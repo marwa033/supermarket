@@ -115,7 +115,7 @@ return this.category
 
 
 async categoryActivation(element) {
-  const data = {_id:element._id};
+  const data = {ids:element};
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}components/categories/changeState`,
 {

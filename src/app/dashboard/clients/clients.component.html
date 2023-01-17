@@ -1,0 +1,170 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="alert alert-danger" role="alert" 
+ *ngIf="AdminRole == 'editor'">
+  <span>No Authorization</span>
+</div>
+<div class="show container-fluide">
+  <form  #form="ngForm" (ngSubmit)="Filter(form.value)">
+    <div class="row" *ngIf="AdminRole != 'editor'">      
+      <section class="col-md-3 mt-2">
+     <mat-form-field >
+       <mat-label>{{'from' | translate}}</mat-label>
+       <input matInput [matDatepicker]="picker"
+       [(ngModel)]="from" name="from">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+     </mat-form-field>
+    </section>
+    
+    <section class="col-md-3 mt-2">
+      <mat-form-field >
+        <mat-label>{{'to' | translate}}</mat-label>
+        <input matInput [matDatepicker]="pickerto"
+        [(ngModel)]="to" name="to">
+       <mat-datepicker-toggle matSuffix [for]="pickerto"></mat-datepicker-toggle>
+       <mat-datepicker #pickerto></mat-datepicker>
+      </mat-form-field>
+     </section>
+     
+     <section class="col-md-3 mt-2">
+       <mat-form-field >
+         <mat-label>{{'Client Name' | translate}}</mat-label>
+         <input matInput [(ngModel)]="clientName" name="clientName">
+
+       </mat-form-field>
+      </section>
+      
+     <section class="col-md-3 mt-2">
+       <mat-form-field >
+         <mat-label>{{'Client Phone' | translate}}</mat-label>
+         <input matInput [(ngModel)]="clientPhone" name="clientPhone">
+         <!-- <mat-select >
+           <mat-option *ngFor="let client of clients" [(ngModel)]="clientPhone"
+            name="clientPhone" [value]=client._id>{{client.user.phone}}</mat-option>
+         </mat-select> -->
+       </mat-form-field>
+      </section>
+      </div>
+      <div class="row justify-content-end">
+      <section class="mb-2" style="display: flex;justify-content: flex-end;padding: 0 15px;">
+       <button mat-raised-button color="accent">{{'Search' | translate}}</button>
+       <button mat-raised-button color="warn" type="button" (click)="action()">{{'Clear' | translate}}</button>
+       <button mat-raised-button color="primary" type="button" (click)="ExportTOExcel()">{{'Export' | translate}}</button>
+      </section>
+    </div>
+   <div class="mat-elevation-z8 example-container">
+ 
+   <table mat-table [dataSource]="dataSource" >
+   
+     <ng-container matColumnDef="count">
+       <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
+       <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
+     </ng-container>
+     
+       <!-- Position Column -->
+       <ng-container matColumnDef="name">
+         <th mat-header-cell *matHeaderCellDef > {{'Name' | translate}} </th>
+         <td mat-cell *matCellDef="let element" > {{element.user.name }} </td>
+         
+       </ng-container>
+
+               <!-- Position Column -->
+               <ng-container matColumnDef="number">
+                   <th mat-header-cell *matHeaderCellDef > {{'clientId' | translate}} </th>
+                   <td mat-cell *matCellDef="let element" > {{element._id }} </td>
+                 </ng-container>
+                 
+               <!-- Position Column -->
+               <ng-container matColumnDef="email">
+                   <th mat-header-cell *matHeaderCellDef > {{'E-mail' | translate}} </th>
+                   <td mat-cell *matCellDef="let element" 
+                   style="text-transform: none;"> {{element.user.email }} </td>
+                 </ng-container>
+                       <!-- Position Column -->
+               <ng-container matColumnDef="wallet">
+                 <th mat-header-cell *matHeaderCellDef > {{'wallet' | translate}} </th>
+                 <td mat-cell *matCellDef="let element" > {{element.wallet }} </td>
+               </ng-container>
+     
+       <!-- Weight Column -->
+       
+       <ng-container matColumnDef="phone">
+         <th mat-header-cell *matHeaderCellDef> {{'Phone Number' | translate}} </th>
+         <td mat-cell *matCellDef="let element"> {{element.user.phone}} </td>
+       </ng-container>
+
+       <ng-container matColumnDef="updatedAt">
+         <th mat-header-cell *matHeaderCellDef> {{'updatedAt' | translate}} </th>
+         <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'d/M/yyy'}} </td>
+       </ng-container>
+       
+       <!-- Name Column -->
+       <ng-container matColumnDef="createdAt">
+         <th mat-header-cell *matHeaderCellDef> {{'createdAt' | translate}} </th>
+         <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'d/M/yyy' }} </td>
+       </ng-container>
+     
+             <ng-container matColumnDef="action">
+               <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
+               <td mat-cell *matCellDef="let element">
+               <mat-icon style="color:brown"class="pointer" *ngIf="AdminRole != 'editor' " title="change wallet"
+                (click)="openSm(changeWallet,element)">money</mat-icon>
+                <mat-icon title="{{'none' | translate}}" *ngIf="AdminRole == 'editor' " >
+                  minimize </mat-icon> 
+             </td>
+             </ng-container>
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+   <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
+   
+   </div>
+ </form>
+  </div>
+
+  
+  <ng-template #changeWallet let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{'Change Wallet' | translate}} </h4>
+    </div>
+    <form #form="ngForm" >
+    <div class="modal-body">
+        <section class="row">
+            <section class="col-md-12">
+                <mat-form-field>
+                    <input matInput placeholder="{{'wallet' | translate}}" 
+                    name="wallet"  [(ngModel)]="wallet">
+                </mat-form-field>
+            </section>
+        </section>
+   </div>
+    <div class="modal-footer">
+      <button class="primary-bg"  style="width:100%; text-align:center" (click)="Wallet()" 
+       type="button" mat-raised-button >{{'Add' | translate}}</button>
+    </div>
+  </form> 
+  </ng-template>
+
+
+  <table id="table" style="display:none;">
+    <tr>
+    <th>{{'ID' | translate}}</th>
+    <th>{{'name' | translate}}</th>
+    <th>{{'clientId' | translate}}</th>
+    <th>{{'E-mail' | translate}}</th>
+    <th>{{ 'wallet' | translate}}</th>
+    <th>{{'Phone Number' | translate}}</th>
+    <th>{{'updatedAt' | translate}}</th>
+    <th>{{'createdAt' | translate}}</th>
+  </tr>
+  <tr *ngFor="let element of clients; let i = index">
+    <td>{{i+1}}</td>
+    <td>{{element.user.name }}</td>
+    <td>{{element._id }} </td>
+    <td>{{element.user.email }}</td>
+    <td>{{element.wallet }}</td>
+    <td>{{element.user.phone}}</td>
+    <td>{{element.updatedAt | date:'d/M/yyy'}}</td>
+    <td>{{element.createdAt | date:'d/M/yyy' }}</td>
+  </tr>    
+   </table>

@@ -16,8 +16,10 @@
                </div>
                <form #form="ngForm" (ngSubmit)="login(form.value)">
                <div fxLayout="column" fxLayoutAlign="start stretch">
-                 <mat-form-field class="field-form justify-content-left" [class.has-error]="emailControl.invalid && emailControl.touched">
-                  <input matInput placeholder="Enter your email" name="email" required email [(ngModel)]="email" #emailControl="ngModel" autocomplete="off">
+                 <mat-form-field class="field-form justify-content-left" style="text-transform:lowercase!important;"
+                  [class.has-error]="emailControl.invalid && emailControl.touched">
+                  <input matInput placeholder="Enter your email" name="email" required email [(ngModel)]="email" 
+                  style="text-transform:lowercase!important;" #emailControl="ngModel" autocomplete="off">
                </mat-form-field>
                <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.required && emailControl.touched">E-mail is required</span>
                <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">E-mail is invalid</span>

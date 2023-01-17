@@ -33,7 +33,7 @@ export class AdsService {
 
   
 async Activation(element) {
-  const data = {_id:element._id};
+  const data = {ids:element};
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}components/ads/changeState`,
 {
@@ -66,6 +66,31 @@ async GetFilter(value) {
   const responsecategoryfilter = await response.json();
   this.filterResult = responsecategoryfilter;
   return this.filterResult;
+}
+async Delete(element) {
+  const data = {
+    ids:element
+  };  
+const bodyobj = JSON.stringify(data);
+const request = new Request(`${SharedData.BASE_URL}components/ads/delete`,
+{
+method: 'Put',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', this.token);
+const response = await fetch( request);
+const getAdd = await response.json();
+let message = getAdd.message;
+if (message) {
+  this.toastr.error(message);
+
+}
+ else{
+  this.toastr.success('Successfully Deleted');
+  // this.router.navigate(['./dashboard/admins']);
+}
 }
 async GetId(id) {
     

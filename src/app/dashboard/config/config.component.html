@@ -1,0 +1,71 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="add">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header">
+          <span class="mr-3">{{'Configuration' | translate}}</span>
+          <mat-icon style="color:dodgerblue"class="pointer"  title="{{'edit' | translate}}" (click)="editRow()" >
+            edit </mat-icon>
+        </h4>
+        <div class="card-body get">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="feeControl.invalid && feeControl.touched">
+                    <mat-label>{{'deliveryFee' | translate}}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="deliveryFee" 
+                    name= "deliveryFee"
+                    required
+                    readonly
+                    autocomplete="off"
+                    #feeControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="feeControl.invalid && feeControl.touched">{{'Enter fee' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="pointControl.invalid && pointControl.touched">
+                    <mat-label>{{'invitationPoints' | translate}}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="invitationPoints" 
+                    name= "invitationPoints"
+                    required
+                    readonly
+                    autocomplete="off"
+                    #pointControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="pointControl.invalid && pointControl.touched">{{'Enter fee' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="freeControl.invalid && freeControl.touched">
+                    <mat-label>{{'maxOrderFreeShipping' | translate}}</mat-label>
+                    <input matInput 
+                    [(ngModel)]="maxOrderFreeShipping" 
+                    name= "maxOrderFreeShipping"
+                    required
+                    readonly
+                    autocomplete="off"
+                    #freeControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="freeControl.invalid && freeControl.touched">{{'Enter fee' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            class="button"
+            id="btn"
+            [disabled]="form.invalid">
+            {{'Update' | translate}}
+           </button>
+        </div> 
+        </form>
+        </div>        
+        <div class="card-footer">
+            <i>{{'createdAt' | translate}}: {{createdAt | date:'d/M/yyy, h:mm a' }}</i><br>
+            <i>{{'updatedAt' | translate}}: {{updatedAt | date:'d/M/yyy, h:mm a'}}</i>
+        </div>
+      </div>
+    </div>
+    </div>

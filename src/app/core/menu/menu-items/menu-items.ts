@@ -16,10 +16,10 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-	 state: 'crm',
-	 name: 'Home',
-	 type: 'button',
-	 icon: 'home',
+    state:'home',
+    name: 'Home',
+    type: 'button',
+    icon: 'home',
   },
   {
 	 state: 'dashboard',
@@ -27,7 +27,7 @@ const MENUITEMS = [
 	 type: 'sub',
 	 icon: 'category',
 	 children: [
-		{state: 'admins', name: 'Show'},
+		{state: 'admins', name: 'Show', type: 'sub', icon: 'menu'},
 		{state: 'addadmin', name: 'Add'}
 	 ]
   },
@@ -69,6 +69,45 @@ const MENUITEMS = [
 	 children: [
 		{state: 'products', name: 'Show'},
 		{state: 'addproduct', name: 'Add'}
+	 ]
+  },
+  {
+	 state: 'dashboard',
+	 name: 'Promo Codes',
+	 type: 'sub',
+	 icon: 'category',
+	 children: [
+		{state: 'promocode', name: 'Show'},
+		{state: 'addpromo', name: 'Add'}
+	 ]
+  },
+  {
+	 state: 'dashboard',
+	 name: 'City',
+	 type: 'sub',
+	 icon: 'category',
+	 children: [
+		{state: 'city', name: 'Show'},
+		{state: 'addcity', name: 'Add'}
+	 ]
+  },
+  {
+	 state: 'dashboard',
+	 name: 'Orders',
+	 type: 'sub',
+	 icon: 'category',
+	 children: [
+		{state: 'orders', name: 'Show'},
+		// {state: 'addorder', name: 'Add'}
+	 ]
+  },
+  {
+	 state: 'dashboard',
+	 name: 'clients',
+	 type: 'sub',
+	 icon: 'category',
+	 children: [
+		{state: 'client', name: 'Show'}
 	 ]
   }
 ];

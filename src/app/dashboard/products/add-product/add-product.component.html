@@ -1,5 +1,8 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
-<div class="add">
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+  <span>No Authorization</span>
+</div>
+<div class="add" *ngIf="AdminRole != 'editor'">
     <div class="container">
     <div class="card shadow ">
         <h4 class="card-header"
@@ -38,6 +41,33 @@
                 </mat-form-field>
             </div>
             <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>{{'Description in arabic' | translate}}</mat-label>
+                <input matInput 
+                [(ngModel)]="arDescription"
+                 name= "arDescription"
+                 autocomplete="off">  
+              </mat-form-field>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>{{'Description in english' | translate}}</mat-label>
+                  <input matInput 
+                  [(ngModel)]="enDescription" 
+                  name= "enDescription"
+                  autocomplete="off">
+              </mat-form-field>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>{{'inventory' | translate}}</mat-label>
+                  <input matInput 
+                  [(ngModel)]="inventory" 
+                  name= "inventory"
+                  autocomplete="off">
+              </mat-form-field>
+          </div>
+            <div class="col-md-6">
                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="priceControl.invalid && priceControl.touched">
                     <mat-label>{{'Price' | translate}}</mat-label>
                     <input matInput 
@@ -51,23 +81,20 @@
                 </mat-form-field>
             </div>
             <div class="col-md-6">
-                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="discountControl.invalid && discountControl.touched">
+                <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>{{'discount' | translate}}</mat-label>
                     <input matInput 
                     [(ngModel)]="discount" 
                     name= "discount"
-                    required
                     number
-                    autocomplete="off"
-                    #discountControl="ngModel">
-                    <mat-error class="text-danger" *ngIf="discountControl.invalid && discountControl.touched">{{'Enter discount' | translate}}</mat-error>
+                    autocomplete="off">
                 </mat-form-field>
             </div>
             
             <section class="col-md-6">
-              <label>{{ 'featured' | translate}}</label><br>
-              <input type="radio" name="featured" [(ngModel)]="featured" value=true>{{'True' |translate}}<br>
-              <input type="radio" name="featured" [(ngModel)]="featured" value=false>{{'False' |translate}}
+              <label >{{ 'featured' | translate}}</label><br>
+              <input type="radio" style="margin:0 10px 0 0" name="featured" [(ngModel)]="featured" value=true>{{'Yes'|translate}}<br>
+              <input type="radio" style="margin:0 10px 0 0" name="featured" [(ngModel)]="featured" value=false>{{'No' |translate}}
             </section>
       <!-- <section class="col-md-6">
         <mat-form-field appearance="fill" [class.has-error]="featuredControl.invalid && featuredControl.touched">
@@ -92,6 +119,7 @@
            <mat-error class="text-danger" *ngIf="subControl.invalid && subControl.touched">{{'Enter the subcategory' | translate}}</mat-error>
          </mat-form-field>
         </section>
+        
             <div class="col-md-6">
                 <img [src]="imageSrc" class="imageSrc"
                 onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
@@ -101,6 +129,18 @@
             </mat-form-field>
             </div>
         </div>
+
+        
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>{{'tags' | translate}}</mat-label>
+              <textarea matInput 
+              [(ngModel)]="tags" 
+              name= "tags"
+              autocomplete="off"></textarea>
+          </mat-form-field>
+      </div>
+
         <div class="flex-button">
             <button mat-raised-button 
             color="primary"

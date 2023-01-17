@@ -10,18 +10,32 @@ import { AddSubComponent } from './sub-categories/add-sub/add-sub.component';
 import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AddPromoComponent } from './promocodes/add-promo/add-promo.component';
+import { PromocodesComponent } from './promocodes/promocodes.component';
+import { AddOrderComponent } from './orders/add-order/add-order.component';
+import { ConfigComponent } from './config/config.component';
+import { ClientsComponent } from './clients/clients.component';
+import { AddCityComponent } from './city/add-city/add-city.component';
+import { CityComponent } from './city/city.component';
+import { NewOrderComponent } from './orders/new-order/new-order.component';
 
 
 
 export const DashboardRoutes: Routes = [
    {
       path: '',
-      redirectTo: 'category',
+      redirectTo: 'home',
       pathMatch: 'full'
    },
    {
       path: '',
       children: [
+         {
+         path: 'home',
+         component: HomeComponent
+         },
          {
          path: 'category',
          component: CategoryComponent
@@ -86,6 +100,50 @@ export const DashboardRoutes: Routes = [
          path: 'profile',
          component: ProfileComponent
          },        
+         {
+         path: 'addpromo',
+         component: AddPromoComponent
+         },
+         {
+         path: 'addpromo/:id',
+         component: AddPromoComponent
+         } ,
+         {
+         path: 'promocode',
+         component: PromocodesComponent
+         },        
+         {
+         path: 'orders',
+         component: OrdersComponent
+         },   
+         {
+         path: 'addorder',
+         component: NewOrderComponent
+         },   
+         {
+         path: 'addorder/:id',
+         component: AddOrderComponent
+         },
+         {
+         path: 'config',
+         component: ConfigComponent
+         },
+         {
+         path: 'client',
+         component: ClientsComponent
+         },
+         {
+         path: 'addcity',
+         component: AddCityComponent
+         },
+         {
+         path: 'addcity/:id',
+         component: AddCityComponent
+         } ,
+         {
+         path: 'city',
+         component: CityComponent
+         }
          ]
    }
 ];

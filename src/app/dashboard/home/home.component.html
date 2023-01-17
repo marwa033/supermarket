@@ -1,0 +1,331 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="container">
+    
+    <div class="card-body title">
+        <h3>{{'Admins' | translate}}</h3>
+    </div>
+<div class="row">
+    <div class="col-md-3 mt-3">
+        <div class="card shadow active">
+            <div class="card-body" style="text-align: center;">
+                <strong>{{ home.admins.supers.active }}</strong><br>
+                <i>{{'Active Super Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow inactive">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.supers.inActive }}</strong><br>
+                <i>{{'InActive Super Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow all">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.supers.all }}</strong><br>
+                <i>{{'All Super Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow active">
+            <div class="card-body" style="text-align: center;">
+                <strong>{{ home.admins.contributers.active }}</strong><br>
+                <i>{{'Active Contributers Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow inactive">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.contributers.inActive }}</strong><br>
+                <i>{{'InActive Contributers Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow all">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.contributers.all }}</strong><br>
+                <i>{{'All Contributers Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow active">
+            <div class="card-body" style="text-align: center;">
+                <strong>{{ home.admins.editors.active }}</strong><br>
+                <i>{{'Active Editors Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow inactive">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.editors.inActive }}</strong><br>
+                <i>{{'InActive Editors Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 mt-3">
+        <div class="card shadow all">
+            <div class="card-body " style="text-align: center;">
+                <strong>{{ home.admins.editors.all }}</strong><br>
+                <i>{{'All Editors Admins'|translate}}</i>
+            </div>
+          </div>
+    </div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'Clients' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.clients.active }}</strong><br>
+            <i>{{'Active Clients'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.clients.inActive }}</strong><br>
+            <i>{{'InActive Clients'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.clients.all }}</strong><br>
+            <i>{{'All Clients'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'Ads' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.ads.active }}</strong><br>
+            <i>{{'Active Ads'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.ads.inActive }}</strong><br>
+            <i>{{'InActive Ads'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.ads.all }}</strong><br>
+            <i>{{'All Ads'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'Categories' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.categories.active }}</strong><br>
+            <i>{{'Active Categories'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.categories.inActive }}</strong><br>
+            <i>{{'InActive Categories'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.categories.all }}</strong><br>
+            <i>{{'All Categories'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'SubCategories' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.subCategories.active }}</strong><br>
+            <i>{{'Active SubCategories'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.subCategories.inActive }}</strong><br>
+            <i>{{'InActive SubCategories'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.subCategories.all }}</strong><br>
+            <i>{{'All SubCategories'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'Products' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.products.active }}</strong><br>
+            <i>{{'Active Products'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.products.inActive }}</strong><br>
+            <i>{{'InActive Products'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.products.all }}</strong><br>
+            <i>{{'All Products'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+
+<br>
+<div class="card-body title">
+    <h3>{{'Promocodes' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.promocodes.active }}</strong><br>
+            <i>{{'Active Promocodes'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.promocodes.inActive }}</strong><br>
+            <i>{{'InActive Promocodes'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow all">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.promocodes.all }}</strong><br>
+            <i>{{'All Promocodes'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+
+<br>
+<div class="card-body title">
+    <h3>{{'Cart' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow active">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.cart.inCart }}</strong><br>
+            <i>{{'processingCart'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.cart.ordered }}</strong><br>
+            <i>{{'orderedCart'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="card-body title">
+    <h3>{{'Orders' | translate}}</h3>
+</div>
+<div class="row">
+<div class="col-md-3 mt-3">
+    <div class="card shadow complete">
+        <div class="card-body" style="text-align: center;">
+            <strong>{{ home.orders.completed }}</strong><br>
+            <i>{{'Completed Orders'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow carried">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.orders.carried }}</strong><br>
+            <i>{{'Carried Orders'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow processing">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.orders.processing }}</strong><br>
+            <i>{{'Processing Orders'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow pending">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.orders.pending }}</strong><br>
+            <i>{{'Pending Orders'|translate}}</i>
+        </div>
+      </div>
+</div>
+<div class="col-md-3 mt-3">
+    <div class="card shadow inactive">
+        <div class="card-body " style="text-align: center;">
+            <strong>{{ home.orders.canceled }}</strong><br>
+            <i>{{'Canceled Orders'|translate}}</i>
+        </div>
+      </div>
+</div>
+</div>
+</div>

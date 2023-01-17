@@ -1,0 +1,164 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+    <span>No Authorization</span>
+  </div>
+<div class="add" *ngIf="AdminRole != 'editor'">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+          {{'Add Promocode' | translate}}
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          {{'Edit Promocode' | translate}} 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="codeControl.invalid && codeControl.touched">
+                    <mat-label>{{'code' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="code" 
+                    name= "code"
+                    required
+                    
+                    autocomplete="off"
+                    #codeControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="codeControl.invalid && codeControl.touched">{{'Enter Code' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="startControl.invalid && startControl.touched">
+                    <mat-label>{{'startDate' | translate}}</mat-label>
+                    <input matInput [matDatepicker]="picker" #startControl="ngModel"
+                     required 
+                     [min]="todayDate"
+                     [(ngModel)]="startDate" name="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error class="text-danger" *ngIf="startControl.invalid && startControl.touched">{{'Enter startdate' | translate}}</mat-error>
+                  </mat-form-field>
+            </div>
+             <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="daysControl.invalid && daysControl.touched">
+                    <mat-label>{{'daysPeriod' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="days" 
+                    type="number"
+                    name= "days"
+                    required
+                    autocomplete="off"
+                    #daysControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="daysControl.invalid && daysControl.touched">{{'Enter days' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="totalControl.invalid && totalControl.touched">
+                    <mat-label>{{'totalUsage' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="total" 
+                    type="number"
+                    name= "total"
+                    required
+                    autocomplete="off"
+                    #totalControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="totalControl.invalid && totalControl.touched">{{'Enter totalUsage' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="maxControl.invalid && maxControl.touched">
+                    <mat-label>{{'maxNumberOfUses' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="max" 
+                    type="number"
+                    name= "max"
+                    required
+                    autocomplete="off"
+                    #maxControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="maxControl.invalid && maxControl.touched">{{'Enter maxNumberOfUses' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="amountControl.invalid && amountControl.touched">
+                    <mat-label>{{'amount' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="amount" 
+                    name= "amount"
+                    type="number"
+                    required
+                    autocomplete="off"
+                    #amountControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="amountControl.invalid && amountControl.touched">{{'Enter amount' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="typeControl.invalid && typeControl.touched">
+                <mat-label>{{'type' | translate}}</mat-label>
+                <mat-select [(ngModel)]="type" name="type"
+                required
+                #typeControl="ngModel">
+                  <mat-option value="amount">{{'amount' | translate}}</mat-option>
+                  <mat-option value="percentage">{{'percentage' | translate}}</mat-option>
+                </mat-select>
+                <mat-error class="text-danger" *ngIf="typeControl.invalid && typeControl.touched">{{'Enter type' | translate}}</mat-error>
+            </mat-form-field>
+             </div>
+             <div class="col-md-6">
+                 <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="forControl.invalid && forControl.touched">
+                 <mat-label>{{'for' | translate}}</mat-label>
+                 <mat-select [(ngModel)]="for" name="for"
+                 required
+                 #forControl="ngModel">
+                   <mat-option value="cash">{{'cash' | translate}}</mat-option>
+                   <mat-option value="online">{{'online' | translate}}</mat-option>
+                   <mat-option value="both">{{'both' | translate}}</mat-option>
+                 </mat-select>
+                 <mat-error class="text-danger" *ngIf="forControl.invalid && forControl.touched">{{'Enter for who' | translate}}</mat-error>
+             </mat-form-field>
+            </div>
+             <div class="col-md-6">
+                <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="iorderControl.invalid && iorderControl.touched">
+                    <mat-label>{{'minOrder' | translate}}</mat-label>
+                    <input matInput
+                    [(ngModel)]="minOrder" 
+                    name= "minOrder"
+                    required
+                    type="number"
+                    autocomplete="off"
+                    #iorderControl="ngModel">
+                    <mat-error class="text-danger" *ngIf="iorderControl.invalid && iorderControl.touched">{{'Enter minorder' | translate}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+               <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="xorderControl.invalid && xorderControl.touched">
+                   <mat-label>{{'maxOrder' | translate}}</mat-label>
+                   <input matInput
+                   [(ngModel)]="maxOrder" 
+                   name= "maxOrder"
+                   type="number"
+                   required
+                   autocomplete="off"
+                   #xorderControl="ngModel">
+                   <mat-error class="text-danger" *ngIf="xorderControl.invalid && xorderControl.touched">{{'Enter maxorder' | translate}}</mat-error>
+               </mat-form-field>
+           </div>
+            
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            class="button"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">{{'Add' | translate}}</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">{{'Update' | translate}}</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

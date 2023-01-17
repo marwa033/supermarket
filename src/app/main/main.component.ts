@@ -109,9 +109,10 @@ breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'showcategory');
 					this.translate.setDefaultLang('ar')
 					this.translate.use(lang);
 			  }else{
+				window.location.reload()
 				// if(confirm("You will start from the home page again")){
 					this.selectImage = data.img;
-				  this.layout = 'ltr';
+				//   this.layout = 'ltr';
 				  this.getlang('en');	
 				  this.translate.setDefaultLang('en')
 				  this.translate.use(lang);
@@ -224,7 +225,7 @@ body.classList.remove('dark-theme-active');
 		this.router.navigate(['dashboard/profile']);
 	}
 	password(){
-		this.router.navigate(['dashboard/changepassword']);
+		this.router.navigate(['dashboard/config']);
 	}
 
 	/**

@@ -15,6 +15,7 @@ export class AdminsService {
   getResult: any;
   lang='en';
   delete: any;
+  filterResult: any;
   constructor(private toastr : ToastrService,
     private router: Router,) { }
 
@@ -121,7 +122,7 @@ return this.add
 
 
 async Activation(element) {
-  const data = {_id:element.userId};
+  const data = {ids:element};
 const bodyobj = JSON.stringify(data);
 const request = new Request(`${SharedData.BASE_URL}auth/users/changeState`,
 {
@@ -141,11 +142,12 @@ request.headers.append('lang', 'ar');
 
 async Delete(element) {
   const data = {
+    ids:element
   };  
 const bodyobj = JSON.stringify(data);
-const request = new Request(`${SharedData.BASE_URL}auth/admins/`+ element.userId,
+const request = new Request(`${SharedData.BASE_URL}auth/admins/delete`,
 {
-method: 'DELETE',
+method: 'PUT',
 body: bodyobj
 });
 request.headers.delete('Content-Type');
@@ -159,8 +161,26 @@ if (message) {
 
 }
  else{
-  this.toastr.success('Successfully Updated');
+  this.toastr.success('Successfully Deleted');
   this.router.navigate(['./dashboard/admins']);
 }
+}
+
+async GetFilter(value) {
+  console.log('*')
+  if(value.status === ""){
+    value.status = undefined
+  }
+  const request =  new Request(`${SharedData.BASE_URL}auth/admins?state=` +value.status,
+  { method: 'GET',}
+  );
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+       request.headers.append('x-auth-token', this.token);
+            request.headers.append('lang', this.lang);
+        const response = await fetch( request);
+  const responsecategoryfilter = await response.json();
+  this.filterResult = responsecategoryfilter;
+  return this.filterResult;
 }
 }

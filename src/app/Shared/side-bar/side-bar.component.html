@@ -16,13 +16,13 @@
             <ng-container *ngIf="verticalMenuStatus; else horizontalMenuStatus">
                <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
                   <mat-list-item menuToggleLink *ngFor="let menuitem of menuList.getAll()">
-                     <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"  [routerLink]="['/dashboard/crm']">
+                     <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"  [routerLink]="['/dashboard/home']">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
                      <span>{{ menuitem.name | translate }}</span>
                      <ng-container *ngIf="menuitem.label">
                         <span class="sidebar-label">{{ menuitem.label}}</span>
                      </ng-container>
-                     </a>
+                     </a> 
                      <span></span>
                      <a menuToggle class="gene-relative" mat-ripple href="javascript:void(0)" *ngIf="menuitem.type === 'sub'">
                         <mat-icon>{{ menuitem.icon }}</mat-icon>

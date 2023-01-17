@@ -1,0 +1,72 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise-fade-rotating" [fullScreen] = "true"></ngx-spinner>
+
+<div class="alert alert-danger" role="alert" style="display: flex;justify-content: space-between;" *ngIf="AdminRole == 'editor'">
+    <span>No Authorization</span>
+  </div>
+<div class="add" *ngIf="AdminRole != 'editor'">
+    <div class="container">
+    <div class="card shadow ">
+        <h4 class="card-header"
+        *ngIf="!updateFlag">
+          {{'Add City' | translate}}
+        </h4>
+        <h4 class="card-header"
+        *ngIf="updateFlag">
+          {{'Edit City' | translate}} 
+        </h4>
+        <div class="card-body">
+            <form class="example-form" #form="ngForm" (ngSubmit)="Add(form.value)">
+                <div class="row">
+                    <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="arControl.invalid && arControl.touched">
+                      <mat-label>{{'Name in arabic' | translate}}</mat-label>
+                      <input matInput 
+                      [(ngModel)]="arname"
+                       name= "arname"
+                       autocomplete="off"
+                       required
+                       #arControl="ngModel">  
+                      <mat-error class="text-danger" *ngIf="arControl.invalid && arControl.touched">{{'Enter name in arabic' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="enControl.invalid && enControl.touched">
+                        <mat-label>{{'Name in english' | translate}}</mat-label>
+                        <input matInput 
+                        [(ngModel)]="enname" 
+                        name= "enname"
+                        required
+                        autocomplete="off"
+                        #enControl="ngModel">
+                        <mat-error class="text-danger" *ngIf="enControl.invalid && enControl.touched">{{'Enter name in english' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="fill" [class.has-error]="feesControl.invalid && feesControl.touched">
+                        <mat-label>{{'shippingFees' | translate}}</mat-label>
+                        <input matInput 
+                        [(ngModel)]="shippingFees" 
+                        name= "shippingFees"
+                        required
+                        autocomplete="off"
+                        #feesControl="ngModel">
+                        <mat-error class="text-danger" *ngIf="feesControl.invalid && feesControl.touched">{{'Enter Shipping Fees' | translate}}</mat-error>
+                    </mat-form-field>
+                </div>
+        </div>
+        <div class="flex-button">
+            <button mat-raised-button 
+            color="primary"
+            class="button"
+            *ngIf="!updateFlag"
+            [disabled]="form.invalid">{{'Add' | translate}}</button>
+            <button mat-raised-button 
+            color="primary"
+            *ngIf="updateFlag"
+            [disabled]="form.invalid">{{'Update' | translate}}</button>
+        </div>      
+        </form>
+        </div>
+      </div>
+    </div>
+    </div>

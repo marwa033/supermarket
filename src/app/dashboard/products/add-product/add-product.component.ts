@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { SubCategoriesService } from 'app/dashboard/sub-categories/sub-categories.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -15,7 +17,11 @@ export class AddProductComponent implements OnInit {
   subCategoryId;
   enname;
   arname;
+  enDescription;
+  arDescription;
+  inventory;
   sub;
+  tags;
   imageSrc;
   imgResultBeforeCompress;
   imgResultAfterCompress;
@@ -27,23 +33,27 @@ export class AddProductComponent implements OnInit {
   price;
   featured;
   lang = JSON.parse(localStorage.getItem('language'))
+  AdminRole = JSON.parse(localStorage.getItem("adminRole"));
   constructor(private imageCompress: NgxImageCompressService,
     private route: ActivatedRoute,
               private spinner: NgxSpinnerService,
               private subService: SubCategoriesService,
               private productService: ProductsService ) { }
-  uploadFile(){
-    this.imageCompress.uploadFile().then(({image, orientation}) => {
-         this.imgResultBeforeCompress = image;
-         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-         this.imageCompress.compressFile(image, null, 60, 60).then(
-           result => {
-             this.imageSrc = result;
-             this.imgResultAfterCompress = result;
-           }
-         );
-       });       
-     }
+              uploadFile(){
+                this.imageCompress.uploadFile().then(({image, orientation}) => {
+                     this.imgResultBeforeCompress = image;
+                     console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+                     this.imageCompress.compressFile(image, orientation, 50, 50).then(
+                       result => {
+                         this.imageSrc = result;
+                         this.imgResultAfterCompress = result;
+                         console.warn(
+                           'Size in bytes is now:',
+                           this.imageCompress.byteCount(result))
+                       }
+                     );
+                   });       
+                 }
   ngOnInit(): void {
     this.Get()
     this.route.params.subscribe(params => {
@@ -61,6 +71,10 @@ export class AddProductComponent implements OnInit {
         this.subCategoryId =  this.product.subCategoryId;
         this.discount = this.product.priceAfterDiscount;
         this.price = this.product.price;
+        this.tags = this.product.tags;
+        this.inventory = this.product.inventory;
+        this.enDescription = this.product.description.en;
+        this.arDescription = this.product.description.ar
         if(this.product.featured === true){
           this.featured = 'true'
         } else{

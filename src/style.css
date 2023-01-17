@@ -16,4 +16,11 @@
 
     *{
       font-family: "Almarai";
+      text-transform: capitalize;
+  }
+  td.mat-cell{
+    padding:0px 5px!important
+  }
+  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+  padding-left:unset!important
   }

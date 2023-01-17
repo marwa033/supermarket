@@ -1,0 +1,53 @@
+// .card:nth-child(1){
+//     background-image: linear-gradient(to right, #008b94, #00a6ae, #00c1c9, #00dee4, #00fbff);
+//     color:#fff;
+//     border:#fff
+// }
+// .card:nth-child(2){
+//     background-image: linear-gradient(to right, #008b94, #00a6ae, #00c1c9, #00dee4, #00fbff);
+//     color:#fff;
+//     border:#fff
+// }
+.title{
+    background-color: #212741;
+    color: #fff;
+    border-radius: 20px;
+}
+.active{
+    background: #1565c0;
+    color: #fff;
+    border-radius: 20px;
+}
+.inactive{
+    background: #c01515;
+    color: #fff;
+    border-radius: 20px;
+}
+.all{
+    background: #fff;
+    color: #000;
+    border-radius: 20px;
+}
+.complete{
+    background: #15c040;
+    color: #fff;
+    border-radius: 20px;
+}
+.carried{
+    background: #b2c015;
+    color: #fff;
+    border-radius: 20px;
+}
+.pending{
+    background: #c07c15;
+    color: #fff;
+    border-radius: 20px;
+}
+.processing{
+    background: #bd15c0;
+    color: #fff;
+    border-radius: 20px;
+}
+.card-body{
+    padding:1rem!important
+}

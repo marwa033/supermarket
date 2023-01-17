@@ -23,6 +23,7 @@ export class AddSubComponent implements OnInit {
   categoryId;
   result;
   lang = JSON.parse(localStorage.getItem('language'))
+  AdminRole = JSON.parse(localStorage.getItem("adminRole"));
   constructor(private imageCompress: NgxImageCompressService,
     private route: ActivatedRoute,
               private spinner: NgxSpinnerService,
